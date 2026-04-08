@@ -1,0 +1,320 @@
+{
+    "HeaderData": [
+        {
+            "label": "Trang chủ",
+            "href": "/"
+        },
+        {
+            "label": "Khóa học",
+            "href": "/courses"
+        },
+        {
+            "label": "Mentor",
+            "href": "/mentors"
+        },
+        {
+            "label": "Cảm nhận",
+            "href": "/testimonials"
+        },
+        {
+            "label": "Đăng ký",
+            "href": "/register"
+        },
+        {
+            "label": "Liên hệ",
+            "href": "/contact"
+        }
+    ],
+    "CourseData": [
+        {
+            "name": "Mobile Development"
+        },
+        {
+            "name": "Web Development"
+        },
+        {
+            "name": "Data Science"
+        },
+        {
+            "name": "Cloud Computing"
+        }
+    ],
+    "HourData": [
+        {
+            "name": "20 giờ / tháng"
+        },
+        {
+            "name": "30 giờ / tháng"
+        },
+        {
+            "name": "40 giờ / tháng"
+        },
+        {
+            "name": "50 giờ / tháng"
+        }
+    ],
+    "Companiesdata": [
+        {
+            "imgSrc": "/images/slickCompany/airbnb.svg"
+        },
+        {
+            "imgSrc": "/images/slickCompany/hubspot.svg"
+        },
+        {
+            "imgSrc": "/images/slickCompany/microsoft.svg"
+        },
+        {
+            "imgSrc": "/images/slickCompany/google.svg"
+        },
+        {
+            "imgSrc": "/images/slickCompany/walmart.svg"
+        },
+        {
+            "imgSrc": "/images/slickCompany/fedex.svg"
+        }
+    ],
+    "CourseDetailData": [
+        {
+            "course": "HTML, CSS, JS",
+            "imageSrc": "/images/courses/coursesOne.svg",
+            "profession": "Phát triển với HTML, CSS, JavaScript",
+            "price": "3600000",
+            "category": "webdevelopment"
+        },
+        {
+            "course": "Node.js",
+            "imageSrc": "/images/courses/coursesTwo.svg",
+            "profession": "Backend với Node.js và Express.js",
+            "price": "525000",
+            "category": "webdevelopment"
+        },
+        {
+            "course": "Database",
+            "imageSrc": "/images/courses/coursesThree.svg",
+            "profession": "Học MongoDB với Mongoose",
+            "price": "525000",
+            "category": "webdevelopment"
+        },
+        {
+            "course": "React.js",
+            "imageSrc": "/images/courses/coursesFour.svg",
+            "profession": "Học React với Redux Toolkit",
+            "price": "2475000",
+            "category": "webdevelopment"
+        },
+        {
+            "course": "React Native",
+            "imageSrc": "/images/courses/coursesOne.svg",
+            "profession": "Học React Native với Node.js",
+            "price": "2225000",
+            "category": "mobiledevelopment"
+        },
+        {
+            "course": "Swift",
+            "imageSrc": "/images/courses/coursesThree.svg",
+            "profession": "Học Swift từ cơ bản",
+            "price": "2225000",
+            "category": "mobiledevelopment"
+        },
+        {
+            "course": "Flutter",
+            "imageSrc": "/images/courses/coursesFour.svg",
+            "profession": "Phát triển ứng dụng Flutter",
+            "price": "1725000",
+            "category": "mobiledevelopment"
+        },
+        {
+            "course": "Onsen UI",
+            "imageSrc": "/images/courses/coursesTwo.svg",
+            "profession": "Học Onsen UI với HTML, CSS",
+            "price": "1725000",
+            "category": "mobiledevelopment"
+        },
+        {
+            "course": "TensorFlow",
+            "imageSrc": "/images/courses/coursesTwo.svg",
+            "profession": "Học TensorFlow với SQL",
+            "price": "2475000",
+            "category": "datascience"
+        },
+        {
+            "course": "AWS",
+            "imageSrc": "/images/courses/coursesFour.svg",
+            "profession": "AWS Deep Learning AMI",
+            "price": "2475000",
+            "category": "datascience"
+        },
+        {
+            "course": "Bokeh",
+            "imageSrc": "/images/courses/coursesOne.svg",
+            "profession": "Học Bokeh với Python",
+            "price": "2475000",
+            "category": "datascience"
+        },
+        {
+            "course": "Scikit",
+            "imageSrc": "/images/courses/coursesThree.svg",
+            "profession": "Phát triển với Scikit và Python",
+            "price": "2225000",
+            "category": "datascience"
+        },
+        {
+            "course": "Laas",
+            "imageSrc": "/images/courses/coursesThree.svg",
+            "profession": "Infra-as-a-Service",
+            "price": "525000",
+            "category": "cloudcomputing"
+        },
+        {
+            "course": "Iaas",
+            "imageSrc": "/images/courses/coursesFour.svg",
+            "profession": "Info-as-a-Service",
+            "price": "725000",
+            "category": "cloudcomputing"
+        },
+        {
+            "course": "Paas",
+            "imageSrc": "/images/courses/coursesOne.svg",
+            "profession": "Platform-as-a-Service",
+            "price": "2475000",
+            "category": "cloudcomputing"
+        },
+        {
+            "course": "Saas",
+            "imageSrc": "/images/courses/coursesTwo.svg",
+            "profession": "Software-as-a-Service",
+            "price": "1450000",
+            "category": "cloudcomputing"
+        }
+    ],
+    "MentorData": [
+        {
+            "name": "Senior UX Designer",
+            "href": "#",
+            "imageSrc": "/images/mentor/boy1.jpg",
+            "imageAlt": "Ảnh mentor Senior UX Designer",
+            "color": "Lee Sang-hyeok"
+        },
+        {
+            "name": "Giảng viên Photoshop",
+            "href": "#",
+            "imageSrc": "/images/mentor/boy2.jpg",
+            "imageAlt": "Ảnh mentor Photoshop",
+            "color": "Joo Ho-Jin"
+        },
+        {
+            "name": "Chuyên gia SEO",
+            "href": "#",
+            "imageSrc": "/images/mentor/boy3.jpg",
+            "imageAlt": "Ảnh mentor SEO",
+            "color": "Mr. Cris"
+        },
+        {
+            "name": "UI/UX Designer",
+            "href": "#",
+            "imageSrc": "/images/mentor/boy4.jpg",
+            "imageAlt": "Ảnh mentor UI/UX Designer",
+            "color": "Luka Doncic"
+        },
+        {
+            "name": "Web Development / Web Design",
+            "href": "#",
+            "imageSrc": "/images/mentor/girl2.jpg",
+            "imageAlt": "Ảnh mentor Web Development",
+            "color": "Cha Mu Hee"
+        },
+        {
+            "name": "Adobe Certified Instructor",
+            "href": "#",
+            "imageSrc": "/images/mentor/girl1.jpg",
+            "imageAlt": "Ảnh mentor Adobe",
+            "color": "Hong Hae In"
+        }
+    ],
+    "TestimonialData": [
+        {
+            "profession": "Graphic Designer",
+            "name": "Bae Suzy",
+            "imgSrc": "/images/testimonial/user-1.jpg",
+            "starimg": "/images/testimonial/stars.png",
+            "detail": "Tôi muốn chuyển sang mảng UI/UX nhưng chưa biết bắt đầu từ đâu. Khóa học này cung cấp lộ trình cực kỳ bài bản, giúp tôi hệ thống lại toàn bộ kiến thức nền tảng."
+        },
+        {
+            "profession": "Freelance Web Developer",
+            "name": "Choi Woo-shik",
+            "imgSrc": "/images/testimonial/user-2.jpg",
+            "starimg": "/images/testimonial/stars.png",
+            "detail": "Làm code lâu năm nhưng tôi luôn thấy yếu phần thẩm mỹ. Sau khóa học, tôi đã có thể tự tay thiết kế giao diện chuẩn chỉnh trước khi bắt tay vào lập trình."
+        },
+        {
+            "profession": "Product Manager",
+            "name": "Yoon Chung Ah",
+            "imgSrc": "/images/testimonial/user-3.jpg",
+            "starimg": "/images/testimonial/stars.png",
+            "detail": "Khóa học giúp tôi hiểu sâu về trải nghiệm người dùng (UX). Giờ đây tôi có thể giao tiếp hiệu quả hơn với đội ngũ design và đưa ra những quyết định sản phẩm đúng đắn."
+        },
+        {
+            "profession": "Intern Designer",
+            "name": "Charlie Puth",
+            "imgSrc": "/images/testimonial/user-4.jpg",
+            "starimg": "/images/testimonial/stars.png",
+            "detail": "Cảm ơn các giảng viên đã hướng dẫn tôi cách sử dụng Figma từ cơ bản đến nâng cao. Các tips về phím tắt và quản lý component giúp tốc độ làm việc của tôi tăng gấp đôi."
+        }
+    ],
+    "FooterLinkData": [
+        {
+            "section": "Công ty",
+            "links": [
+                {
+                    "label": "Trang chủ",
+                    "href": "/"
+                },
+                {
+                    "label": "Khóa học",
+                    "href": "/courses"
+                },
+                {
+                    "label": "Mentor",
+                    "href": "/mentors"
+                },
+                {
+                    "label": "Cảm nhận",
+                    "href": "/testimonials"
+                },
+                {
+                    "label": "Đăng ký",
+                    "href": "/register"
+                },
+                {
+                    "label": "Liên hệ",
+                    "href": "/contact"
+                }
+            ]
+        },
+        {
+            "section": "Hỗ trợ",
+            "links": [
+                {
+                    "label": "Trung tâm trợ giúp",
+                    "href": "/"
+                },
+                {
+                    "label": "Điều khoản dịch vụ",
+                    "href": "/"
+                },
+                {
+                    "label": "Pháp lý",
+                    "href": "/"
+                },
+                {
+                    "label": "Chính sách quyền riêng tư",
+                    "href": "/"
+                },
+                {
+                    "label": "Trạng thái",
+                    "href": "/"
+                }
+            ]
+        }
+    ]
+}
