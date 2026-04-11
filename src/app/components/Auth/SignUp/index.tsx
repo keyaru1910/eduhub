@@ -1,35 +1,20 @@
 'use client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import toast from 'react-hot-toast'
-import SocialSignUp from '../SocialSignUp'
 import Logo from '@/app/components/Layout/Header/Logo'
-import { useState } from 'react'
+import { useActionState, useEffect } from 'react'
 import Loader from '@/app/components/Common/Loader'
+import { signupAction } from '@/server/actions'
+import { initialActionState } from '@/server/action-state'
 const SignUp = () => {
     const router = useRouter()
-    const [loading, setLoading] = useState(false)
+    const [state, formAction, pending] = useActionState(signupAction, initialActionState)
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-
-        setLoading(true)
-        const data = new FormData(e.currentTarget)
-        const value = Object.fromEntries(data.entries())
-        const finalData = { ...value }
-
-        // Simulate registration (static site)
-        new Promise((resolve) => setTimeout(resolve, 200))
-            .then(() => {
-                toast.success('Successfully registered')
-                setLoading(false)
-                router.push('/signin')
-            })
-            .catch((err) => {
-                toast.error(err?.message || 'Registration failed')
-                setLoading(false)
-            })
-    }
+    useEffect(() => {
+        if (state.success) {
+            router.push('/signin')
+        }
+    }, [router, state.success])
 
     return (
         <>
@@ -37,15 +22,7 @@ const SignUp = () => {
                 <Logo />
             </div>
 
-            <SocialSignUp />
-
-            <span className="z-1 relative my-8 block text-center before:content-[''] before:absolute before:h-px before:w-[40%] before:bg-black/20 before:left-0 before:top-3 after:content-[''] after:absolute after:h-px after:w-[40%] after:bg-black/20 after:top-3 after:right-0 dark:before:bg-white/15 dark:after:bg-white/15">
-                <span className='text-body-secondary relative z-10 inline-block px-3 text-base text-black dark:text-slate-200'>
-                    HOẶC
-                </span>
-            </span>
-
-            <form onSubmit={handleSubmit}>
+            <form action={formAction}>
                 <div className='mb-[22px]'>
                     <input
                         type='text'
@@ -77,10 +54,15 @@ const SignUp = () => {
                     <button
                         type='submit'
                         className='flex w-full items-center text-18 font-medium justify-center rounded-md  text-white bg-primary px-5 py-3 text-darkmode transition duration-300 ease-in-out hover:bg-transparent hover:text-primary border-primary border hover:cursor-pointer'>
-                        Đăng ký {loading && <Loader />}
+                        Đăng ký {pending && <Loader />}
                     </button>
                 </div>
             </form>
+            {state.message && (
+                <p className={`mb-4 text-sm ${state.success ? 'text-green-600' : 'text-red-500'}`}>
+                    {state.message}
+                </p>
+            )}
 
             <p className='text-body-secondary mb-4 text-base text-black dark:text-slate-200'>
                 Bằng việc tạo tài khoản, bạn đồng ý với{' '}
@@ -95,7 +77,7 @@ const SignUp = () => {
 
             <p className='text-body-secondary text-base text-black dark:text-slate-200'>
                 Đã có tài khoản?
-                <Link href='/' className='pl-2 text-primary hover:underline'>
+                <Link href='/signin' className='pl-2 text-primary hover:underline'>
                     Đăng nhập
                 </Link>
             </p>

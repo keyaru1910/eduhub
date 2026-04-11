@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Image from 'next/image'
 import { CourseDetailType } from '@/app/types/coursedetail'
@@ -22,27 +22,7 @@ interface Name {
 const formatVndPrice = (price: string) =>
     `${new Intl.NumberFormat('vi-VN').format(Number(price))} đ`
 
-const NamesList = () => {
-    // -------------------------------------------------------------
-    const [courseDetail, setCourseDetail] = useState<CourseDetailType[]>([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch.')
-                const data = await res.json()
-                setCourseDetail(data.CourseDetailData)
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
-    // -------------------------------------------------------------
+const NamesList = ({ items }: { items: CourseDetailType[] }) => {
 
     const [selectedButton, setSelectedButton] = useState<
         | 'mobiledevelopment'
@@ -52,16 +32,16 @@ const NamesList = () => {
         | 'all'
         | null
     >('webdevelopment')
-    const mobileDevelopment = courseDetail.filter(
+    const mobileDevelopment = items.filter(
         (name) => name.category === 'mobiledevelopment'
     )
-    const webDevelopment = courseDetail.filter(
+    const webDevelopment = items.filter(
         (name) => name.category === 'webdevelopment'
     )
-    const dataScience = courseDetail.filter(
+    const dataScience = items.filter(
         (name) => name.category === 'datascience'
     )
-    const cloudComputing = courseDetail.filter(
+    const cloudComputing = items.filter(
         (name) => name.category === 'cloudcomputing'
     )
 
@@ -237,7 +217,7 @@ const NamesList = () => {
                 </div>
                 <div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
-                        {loading ? (
+                        {items.length === 0 ? (
                             Array.from({ length: 4 }).map((_, i) => (
                                 <CourseDetailSkeleton key={i} />
                             ))

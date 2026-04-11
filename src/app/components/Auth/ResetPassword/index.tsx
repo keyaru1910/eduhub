@@ -1,71 +1,29 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import Loader from "@/app/components/Common/Loader";
 import Link from "next/link";
 import Image from "next/image";
 import withBasePath from '@/utils/basePath'
+import { resetPasswordAction } from "@/server/actions";
+import { initialActionState } from "@/server/action-state";
 
 const ResetPassword = ({ token }: { token: string }) => {
-    const [data, setData] = useState({
-        newPassword: "",
-        ReNewPassword: "",
-    });
-    const [loader, setLoader] = useState(false);
-
-    const [user, setUser] = useState({
-        email: "",
-    });
-
     const router = useRouter();
+    const resetWithToken = resetPasswordAction.bind(null, token)
+    const [state, formAction, pending] = useActionState(
+        resetWithToken,
+        initialActionState,
+    )
 
     useEffect(() => {
-        // Static site: simulate token verification (no dynamic API)
-        const verifyToken = async () => {
-            try {
-                // simulate network delay
-                await new Promise((r) => setTimeout(r, 200))
-                setUser({ email: 'user@example.com' })
-            } catch (error) {
-                toast.error('Token không hợp lệ')
-                router.push('/forgot-password')
-            }
+        if (state.success) {
+            const timeout = setTimeout(() => {
+                router.push('/signin')
+            }, 1200)
+            return () => clearTimeout(timeout)
         }
-
-        verifyToken()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setLoader(true);
-
-        if (data.newPassword === "") {
-            toast.error("Vui lòng nhập mật khẩu.");
-            return;
-        }
-
-        try {
-            // simulate update
-            await new Promise((r) => setTimeout(r, 200))
-            toast.success('Cập nhật mật khẩu thành công')
-            setData({ newPassword: '', ReNewPassword: '' })
-            router.push('/signin')
-            setLoader(false)
-        } catch (error: any) {
-            toast.error('Cập nhật thất bại')
-            setLoader(false)
-        }
-    };
+    }, [router, state.success])
 
     return (
         <section className="bg-cream py-14 dark:bg-dark lg:py-20">
@@ -97,14 +55,12 @@ const ResetPassword = ({ token }: { token: string }) => {
                                 </Link>
                             </div>
 
-                            <form onSubmit={handleSubmit}>
+                            <form action={formAction}>
                                 <div className="mb-[22px]">
                                     <input
-                                        type="text"
+                                        type="password"
                                         placeholder="Mật khẩu mới"
                                         name="newPassword"
-                                        value={data?.newPassword}
-                                        onChange={handleChange}
                                         required
                                         className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary"
                                     />
@@ -112,11 +68,9 @@ const ResetPassword = ({ token }: { token: string }) => {
 
                                 <div className="mb-[22px]">
                                     <input
-                                        type="text"
+                                        type="password"
                                         placeholder="Nhập lại mật khẩu mới"
-                                        name="newPassword"
-                                        value={data?.newPassword}
-                                        onChange={handleChange}
+                                        name="confirmPassword"
                                         required
                                         className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary"
                                     />
@@ -126,10 +80,15 @@ const ResetPassword = ({ token }: { token: string }) => {
                                         type="submit"
                                         className="flex w-full cursor-pointer items-center justify-center rounded-md border border-primary bg-primary px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-transparent hover:text-primary"
                                     >
-                                        Lưu mật khẩu {loader && <Loader />}
+                                        Lưu mật khẩu {pending && <Loader />}
                                     </button>
                                 </div>
                             </form>
+                            {state.message && (
+                                <p className={`mt-4 text-sm ${state.success ? 'text-green-600' : 'text-red-500'}`}>
+                                    {state.message}
+                                </p>
+                            )}
 
                             <div>
                                 <span className="absolute right-1 top-1">

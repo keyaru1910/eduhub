@@ -1,5 +1,5 @@
 'use client'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import {
     Listbox,
     ListboxButton,
@@ -9,26 +9,9 @@ import {
 } from '@headlessui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { CourseType } from '@/app/types/course'
-import withBasePath from '@/utils/basePath'
 
-const Dropdown = () => {
-    const [course, setCourse] = useState<CourseType[]>([])
-    const [selected, setSelected] = useState<CourseType | null>(null)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                setCourse(data.CourseData)
-                setSelected(data.CourseData[0])
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            }
-        }
-        fetchData()
-    }, [])
+const Dropdown = ({ options }: { options: CourseType[] }) => {
+    const [selected, setSelected] = useState<CourseType | null>(options[0] ?? null)
 
     return (
         <div className='w-full'>
@@ -52,7 +35,7 @@ const Dropdown = () => {
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'>
                         <ListboxOptions className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:bg-slate-900 dark:text-white dark:ring-white/10 sm:text-sm'>
-                            {course.map((person, personIdx) => (
+                            {options.map((person, personIdx) => (
                                 <ListboxOption
                                     key={personIdx}
                                     className={({ active }) =>

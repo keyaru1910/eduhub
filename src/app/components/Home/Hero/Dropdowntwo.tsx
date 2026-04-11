@@ -1,5 +1,5 @@
 'use client'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import {
     Listbox,
     ListboxButton,
@@ -9,26 +9,9 @@ import {
 } from '@headlessui/react'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Hourtype } from '@/app/types/hour'
-import withBasePath from '@/utils/basePath'
 
-const Dropdown = () => {
-    const [hour, setHour] = useState<Hourtype[]>([])
-    const [selected, setSelected] = useState<Hourtype | null>(null)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                setHour(data.HourData)
-                setSelected(data.HourData[0])
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            }
-        }
-        fetchData()
-    }, [])
+const Dropdown = ({ options }: { options: Hourtype[] }) => {
+    const [selected, setSelected] = useState<Hourtype | null>(options[0] ?? null)
 
     return (
         <div className='w-full'>
@@ -52,7 +35,7 @@ const Dropdown = () => {
                         leaveFrom='opacity-100'
                         leaveTo='opacity-0'>
                         <ListboxOptions className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-hidden dark:bg-slate-900 dark:text-white dark:ring-white/10 sm:text-sm'>
-                            {hour.map((person, personIdx) => (
+                            {options.map((person, personIdx) => (
                                 <ListboxOption
                                     key={personIdx}
                                     className={({ active }) =>

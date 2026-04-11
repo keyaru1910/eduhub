@@ -1,39 +1,18 @@
 "use client";
 import React from "react";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import axios from "axios";
-import withBasePath from '@/utils/basePath'
+import { useActionState } from "react";
 import Loader from "@/app/components/Common/Loader";
 import Link from "next/link";
 import Image from "next/image";
+import withBasePath from '@/utils/basePath'
+import { forgotPasswordAction } from "@/server/actions";
+import { initialActionState } from "@/server/action-state";
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
-    const [loader, setLoader] = useState(false);
-
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-
-        if (!email) {
-            toast.error("Vui lòng nhập địa chỉ email.");
-
-            return;
-        }
-
-        setLoader(true);
-
-        try {
-            // Simulate a successful forgot-password request (static site)
-            await new Promise((r) => setTimeout(r, 200))
-            toast.success('Đã gửi email đặt lại mật khẩu')
-            setEmail('')
-            setLoader(false)
-        } catch (error: any) {
-            toast.error('Gửi email thất bại')
-            setLoader(false)
-        }
-    };
+    const [state, formAction, pending] = useActionState(
+        forgotPasswordAction,
+        initialActionState,
+    );
 
     return (
         <section className="bg-cream py-14 dark:bg-dark lg:py-20">
@@ -65,14 +44,12 @@ const ForgotPassword = () => {
                                 </Link>
                             </div>
 
-                            <form onSubmit={handleSubmit}>
+                            <form action={formAction}>
                                 <div className="mb-[22px]">
                                     <input
                                         type="email"
                                         placeholder="Email"
                                         name="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
                                         required
                                         className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-hidden transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary"
                                     />
@@ -82,10 +59,15 @@ const ForgotPassword = () => {
                                         type="submit"
                                         className="flex w-full cursor-pointer items-center justify-center rounded-md border border-primary bg-primary px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-transparent hover:text-primary"
                                     >
-                                        Gửi email {loader && <Loader />}
+                                        Gửi email {pending && <Loader />}
                                     </button>
                                 </div>
                             </form>
+                            {state.message && (
+                                <p className={`mt-4 text-sm ${state.success ? 'text-green-600' : 'text-red-500'}`}>
+                                    {state.message}
+                                </p>
+                            )}
 
                             <div>
                                 <span className="absolute right-1 top-1">

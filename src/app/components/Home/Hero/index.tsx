@@ -4,6 +4,8 @@ import Dropdowntwo from './Dropdowntwo'
 import Image from 'next/image'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import withBasePath from '@/utils/basePath'
+import { CourseType } from '@/app/types/course'
+import { Hourtype } from '@/app/types/hour'
 
 const heroReviewAvatars = [
     '/images/testimonial/user-5.jpg',
@@ -15,7 +17,13 @@ const heroReviewAvatars = [
 
 const fullStars = Array.from({ length: 4 })
 
-const Banner = () => {
+const Banner = ({
+    courseOptions,
+    hourOptions,
+}: {
+    courseOptions: CourseType[]
+    hourOptions: Hourtype[]
+}) => {
     return (
         <section
             id='Home'
@@ -91,10 +99,10 @@ const Banner = () => {
                     <div className='boxshadow mx-auto mt-12 max-w-4xl rounded-lg bg-white p-6 dark:border dark:border-white/10 dark:bg-slate-900/95 dark:shadow-black/30 lg:max-w-4xl lg:px-8'>
                         <div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-8'>
                             <div className='col-span-3'>
-                                <Dropdownone />
+                                <Dropdownone options={courseOptions} />
                             </div>
                             <div className='col-span-3'>
-                                <Dropdowntwo />
+                                <Dropdowntwo options={hourOptions} />
                             </div>
                             <div className='col-span-3 sm:col-span-2 mt-2'>
                                 <Link

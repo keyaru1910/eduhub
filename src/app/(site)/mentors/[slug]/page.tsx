@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Breadcrumb from '@/app/components/Common/Breadcrumb'
-import { getMentorBySlug, mentors } from '@/data/mentors'
+import { getMentorBySlug } from '@/server/content/service'
 import withBasePath from '@/utils/basePath'
 
 type MentorDetailPageProps = {
@@ -12,17 +12,11 @@ type MentorDetailPageProps = {
   }>
 }
 
-export async function generateStaticParams() {
-  return mentors.map((mentor) => ({
-    slug: mentor.slug,
-  }))
-}
-
 export async function generateMetadata({
   params,
 }: MentorDetailPageProps): Promise<Metadata> {
   const { slug } = await params
-  const mentor = getMentorBySlug(slug)
+  const mentor = await getMentorBySlug(slug)
 
   if (!mentor) {
     return {
@@ -36,9 +30,11 @@ export async function generateMetadata({
   }
 }
 
+export const dynamic = 'force-dynamic'
+
 const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
   const { slug } = await params
-  const mentor = getMentorBySlug(slug)
+  const mentor = await getMentorBySlug(slug)
 
   if (!mentor) {
     notFound()
@@ -46,14 +42,14 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
 
   return (
     <>
-      <Breadcrumb pageName={mentor.name} pageDescription={mentor.role} />
+      <Breadcrumb pageName={mentor.name} pageDescription={mentor.title} />
       <section className='pb-20'>
         <div className='container mx-auto max-w-6xl px-4'>
           <div className='grid gap-8 rounded-[28px] border border-primary/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20 lg:grid-cols-[0.9fr_1.1fr] lg:p-8'>
             <div className='overflow-hidden rounded-3xl bg-slate-100 dark:bg-slate-800'>
               <Image
-                src={withBasePath(mentor.imageSrc)}
-                alt={mentor.imageAlt}
+                src={withBasePath(mentor.image)}
+                alt={`Anh mentor ${mentor.name}`}
                 width={900}
                 height={1000}
                 className='h-full w-full object-cover'
@@ -67,15 +63,15 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
                 {mentor.name}
               </h1>
               <p className='mt-3 text-xl font-medium text-black/70 dark:text-slate-200'>
-                {mentor.role}
+                {mentor.title}
               </p>
               <p className='mt-5 text-base leading-8 text-black/70 dark:text-slate-300'>
-                {mentor.fullBio}
+                {mentor.bio}
               </p>
 
               <div className='mt-6 flex flex-wrap gap-3'>
                 <div className='rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary'>
-                  {mentor.yearsOfExperience}+ năm kinh nghiệm
+                {mentor.yearsOfExperience}+ năm kinh nghiệm
                 </div>
                 {mentor.expertise.map((item) => (
                   <div

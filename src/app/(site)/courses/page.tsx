@@ -2,13 +2,18 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Breadcrumb from '@/app/components/Common/Breadcrumb'
 import NamesList from '@/app/components/Home/Courses'
+import { getPublishedCourses } from '@/server/content/service'
 
 export const metadata: Metadata = {
   title: 'Khóa học | Edu Hub',
   description: 'Khám phá các khóa học nổi bật về web, mobile, data và cloud.',
 }
 
-const CoursesPage = () => {
+export const dynamic = 'force-dynamic'
+
+const CoursesPage = async () => {
+  const courses = await getPublishedCourses()
+
   return (
     <>
       <Breadcrumb
@@ -58,7 +63,19 @@ const CoursesPage = () => {
           </div>
         </div>
       </section>
-      <NamesList />
+      <NamesList
+        items={courses.map((course) => ({
+          course: course.title,
+          imageSrc: course.image,
+          price: String(course.price),
+          profession: course.description,
+          category: course.category as
+            | 'webdevelopment'
+            | 'mobiledevelopment'
+            | 'datascience'
+            | 'cloudcomputing',
+        }))}
+      />
     </>
   )
 }

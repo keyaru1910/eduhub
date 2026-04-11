@@ -1,6 +1,9 @@
 'use client'
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useActionState, useEffect, useState } from 'react'
+import { submitContactAction } from '@/server/actions'
+import { initialActionState } from '@/server/action-state'
+import Loader from '@/app/components/Common/Loader'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +13,12 @@ const ContactForm = () => {
     phnumber: '',
     Message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
   const [showThanks, setShowThanks] = useState(false)
-  const [loader, setLoader] = useState(false)
   const [isFormValid, setIsFormValid] = useState(false)
+  const [state, formAction, pending] = useActionState(
+    submitContactAction,
+    initialActionState,
+  )
 
   useEffect(() => {
     const isValid = Object.values(formData).every(
@@ -21,6 +26,22 @@ const ContactForm = () => {
     )
     setIsFormValid(isValid)
   }, [formData])
+
+  useEffect(() => {
+    if (state.success) {
+      setFormData({
+        firstname: '',
+        lastname: '',
+        email: '',
+        phnumber: '',
+        Message: '',
+      })
+      setShowThanks(true)
+      const timeout = setTimeout(() => setShowThanks(false), 5000)
+      return () => clearTimeout(timeout)
+    }
+  }, [state])
+
   const handleChange = (e: any) => {
     const { name, value } = e.target
     setFormData((prevData) => ({
@@ -28,54 +49,13 @@ const ContactForm = () => {
       [name]: value,
     }))
   }
-  const reset = () => {
-    formData.firstname = ''
-    formData.lastname = ''
-    formData.email = ''
-    formData.phnumber = ''
-    formData.Message = ''
-  }
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoader(true)
-
-    fetch('https://formsubmit.co/ajax/bhainirav772@gmail.com', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({
-        Name: formData.firstname,
-        LastName: formData.lastname,
-        Email: formData.email,
-        PhoneNo: formData.phnumber,
-        Message: formData.Message,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setSubmitted(true)
-          setShowThanks(true)
-          reset()
-
-          setTimeout(() => {
-            setShowThanks(false)
-          }, 5000)
-        }
-
-        reset()
-      })
-      .catch((error) => {
-        setLoader(false)
-        console.log(error.message)
-      })
-  }
   return (
     <section id='contact'>
       <div className='container'>
         <div className='relative'>
           <h2 className='mb-9 font-bold tracking-tight'>Liên hệ với chúng tôi</h2>
           <form
-            onSubmit={handleSubmit}
+            action={formAction}
             className='flex flex-wrap w-full m-auto justify-between'>
             <div className='sm:flex gap-3 w-full'>
               <div className='mx-0 my-2.5 flex-1'>
@@ -154,20 +134,23 @@ const ContactForm = () => {
             <div className='mx-0 my-2.5 w-full'>
               <button
                 type='submit'
-                disabled={!isFormValid || loader}
+                disabled={!isFormValid || pending}
                 className={`border leading-none px-6 text-lg font-medium py-4 rounded-full 
                     ${
-                      !isFormValid || loader
+                      !isFormValid || pending
                         ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                         : 'bg-primary border-primary text-white hover:bg-transparent hover:text-primary cursor-pointer'
                     }`}>
-                Gửi liên hệ
+                Gửi liên hệ {pending && <Loader />}
               </button>
             </div>
           </form>
+          {!state.success && state.message && (
+            <p className='mt-3 text-sm text-red-500'>{state.message}</p>
+          )}
           {showThanks && (
             <div className='text-white bg-primary rounded-full px-4 text-lg mb-4.5 mt-1 absolute flex items-center gap-2'>
-              Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất có thể.
+              {state.message}
               <div className='w-3 h-3 rounded-full animate-spin border-2 border-solid border-white border-t-transparent'></div>
             </div>
           )}

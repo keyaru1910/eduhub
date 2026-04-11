@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Image from 'next/image'
 import withBasePath from '@/utils/basePath'
 
-const Companies = () => {
+const Companies = ({ items }: { items: { imgSrc: string }[] }) => {
     const settings = {
         dots: false,
         infinite: true,
@@ -47,23 +47,6 @@ const Companies = () => {
             },
         ],
     }
-
-    const [companies, setCompianes] = useState<{ imgSrc: string }[]>([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                setCompianes(data.Companiesdata)
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            }
-        }
-        fetchData()
-    }, [])
-
     return (
         <section>
             <div className='container mx-auto max-w-7xl px-4'>
@@ -72,7 +55,7 @@ const Companies = () => {
                 </h2>
                 <div>
                     <Slider {...settings}>
-                        {companies.map((item, i) => (
+                        {items.map((item, i) => (
                             <div key={i}>
                                 <Image
                                     src={withBasePath(item.imgSrc)}

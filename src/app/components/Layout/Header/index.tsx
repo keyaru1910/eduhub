@@ -8,35 +8,20 @@ import Signin from '@/app/components/Auth/SignIn'
 import SignUp from '@/app/components/Auth/SignUp'
 import ThemeToggler from './ThemeToggler'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { HeaderItem } from '@/app/types/menu'
-import withBasePath from '@/utils/basePath'
+import { headerLinks } from '@/server/marketing-data'
+import { signOut, useSession } from 'next-auth/react'
 
 const Header: React.FC = () => {
-    const [headerData, setHeaderData] = useState<HeaderItem[]>([])
-
     const [navbarOpen, setNavbarOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
     const [isSignInOpen, setIsSignInOpen] = useState(false)
     const [isSignUpOpen, setIsSignUpOpen] = useState(false)
+    const { data: session } = useSession()
 
     const navbarRef = useRef<HTMLDivElement>(null)
     const signInRef = useRef<HTMLDivElement>(null)
     const signUpRef = useRef<HTMLDivElement>(null)
     const mobileMenuRef = useRef<HTMLDivElement>(null)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                setHeaderData(data.HeaderData)
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            }
-        }
-        fetchData()
-    }, [])
 
     const handleScroll = () => {
         setSticky(window.scrollY >= 10)
@@ -89,18 +74,35 @@ const Header: React.FC = () => {
                 <div className='container mx-auto max-w-7xl px-4 flex items-center justify-between'>
                     <Logo />
                     <nav className='hidden lg:flex grow items-center gap-8 justify-start ml-14'>
-                        {headerData.map((item, index) => (
+                        {headerLinks.map((item, index) => (
                             <HeaderLink key={index} item={item} />
                         ))}
                     </nav>
                     <div className='flex items-center gap-4'>
-                        <button
-                            className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'
-                            onClick={() => {
-                                setIsSignInOpen(true)
-                            }}>
-                            Đăng nhập
-                        </button>
+                        {session?.user ? (
+                            <>
+                                {session.user.role === 'admin' && (
+                                    <a
+                                        href='/admin'
+                                        className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'>
+                                        Admin
+                                    </a>
+                                )}
+                                <button
+                                    className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'
+                                    onClick={() => signOut({ callbackUrl: '/' })}>
+                                    Đăng xuất
+                                </button>
+                            </>
+                        ) : (
+                            <button
+                                className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'
+                                onClick={() => {
+                                    setIsSignInOpen(true)
+                                }}>
+                                Đăng nhập
+                            </button>
+                        )}
                         {isSignInOpen && (
                             <div className='fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50'>
                                 <div
@@ -121,13 +123,15 @@ const Header: React.FC = () => {
                                 </div>
                             </div>
                         )}
-                        <button
-                            className='hidden rounded-lg border border-primary bg-primary px-6 py-2 text-base font-medium text-white duration-300 hover:bg-transparent hover:text-primary hover:cursor-pointer lg:block'
-                            onClick={() => {
-                                setIsSignUpOpen(true)
-                            }}>
-                            Đăng ký
-                        </button>
+                        {!session?.user && (
+                            <button
+                                className='hidden rounded-lg border border-primary bg-primary px-6 py-2 text-base font-medium text-white duration-300 hover:bg-transparent hover:text-primary hover:cursor-pointer lg:block'
+                                onClick={() => {
+                                    setIsSignUpOpen(true)
+                                }}>
+                                Đăng ký
+                            </button>
+                        )}
                         <div className='hidden lg:flex items-center rounded-full border border-black/10 bg-white/90 px-1.5 py-1 shadow-sm dark:border-white/15 dark:bg-slate-900/90'>
                             <ThemeToggler />
                         </div>
@@ -185,7 +189,7 @@ const Header: React.FC = () => {
                         </button>
                     </div>
                     <nav className='flex flex-col items-start p-4'>
-                        {headerData.map((item, index) => (
+                        {headerLinks.map((item, index) => (
                             <MobileHeaderLink
                                 key={index}
                                 item={item}
@@ -199,22 +203,32 @@ const Header: React.FC = () => {
                                 </span>
                                 <ThemeToggler />
                             </div>
-                            <button
-                                className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
-                                onClick={() => {
-                                    setIsSignInOpen(true)
-                                    setNavbarOpen(false)
-                                }}>
-                                Đăng nhập
-                            </button>
-                            <button
-                                className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
-                                onClick={() => {
-                                    setIsSignUpOpen(true)
-                                    setNavbarOpen(false)
-                                }}>
-                                Đăng ký
-                            </button>
+                            {session?.user ? (
+                                <button
+                                    className='bg-primary text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                    onClick={() => signOut({ callbackUrl: '/' })}>
+                                    Đăng xuất
+                                </button>
+                            ) : (
+                                <>
+                                    <button
+                                        className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                        onClick={() => {
+                                            setIsSignInOpen(true)
+                                            setNavbarOpen(false)
+                                        }}>
+                                        Đăng nhập
+                                    </button>
+                                    <button
+                                        className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                        onClick={() => {
+                                            setIsSignUpOpen(true)
+                                            setNavbarOpen(false)
+                                        }}>
+                                        Đăng ký
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </nav>
                 </div>

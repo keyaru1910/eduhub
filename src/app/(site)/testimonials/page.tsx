@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/app/components/Common/Breadcrumb";
 import Testimonial from "@/app/components/Home/Testimonial";
+import { getPublishedTestimonials } from "@/server/content/service";
 
 export const metadata: Metadata = {
   title: "Cảm nhận học viên | Edu Hub",
@@ -9,7 +10,11 @@ export const metadata: Metadata = {
     "Những chia sẻ từ học viên sau khi tham gia các khóa học và chương trình mentor.",
 };
 
-const TestimonialsPage = () => {
+export const dynamic = 'force-dynamic';
+
+const TestimonialsPage = async () => {
+  const testimonials = await getPublishedTestimonials();
+
   return (
     <>
       <Breadcrumb
@@ -67,7 +72,15 @@ const TestimonialsPage = () => {
           </div>
         </div>
       </section>
-      <Testimonial />
+      <Testimonial
+        items={testimonials.map((testimonial) => ({
+          profession: testimonial.role,
+          name: testimonial.name,
+          imgSrc: testimonial.avatar,
+          starimg: "/images/testimonial/stars.png",
+          detail: testimonial.content,
+        }))}
+      />
     </>
   );
 };

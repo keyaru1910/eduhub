@@ -1,29 +1,11 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useEffect, useState } from "react";
-import { FooterLinkType } from "@/app/types/footerlinks";
 import withBasePath from "@/utils/basePath";
+import { footerLinks } from "@/server/marketing-data";
 
 const Footer = () => {
-  const [footerlink, SetFooterlink] = useState<FooterLinkType[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(withBasePath("/data/data.json"));
-        if (!res.ok) throw new Error("Failed to fetch");
-        const data = await res.json();
-        SetFooterlink(data.FooterLinkData);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
     <div className="bg-primary" id="first-section">
       <div className="container pt-60 pb-10">
@@ -54,7 +36,7 @@ const Footer = () => {
                 />
               </Link>
               <Link
-                href="/"
+                href="https://www.linkedin.com/in/l%C3%A2m-tr%E1%BA%A7n-59799b3b7/"
                 scroll={false}
                 className="bg-white/20 rounded-full p-2 text-white hover:bg-cream hover:text-primary duration-300"
               >
@@ -64,7 +46,7 @@ const Footer = () => {
                 />
               </Link>
               <Link
-                href="/"
+                href="https://www.facebook.com/lam.keyaru"
                 scroll={false}
                 className="bg-white/20 rounded-full p-2 text-white hover:bg-cream hover:text-primary duration-300"
               >
@@ -74,7 +56,7 @@ const Footer = () => {
                 />
               </Link>
               <Link
-                href="/"
+                href="https://github.com/keyaru1910"
                 scroll={false}
                 className="bg-white/20 rounded-full p-2 text-white hover:bg-cream hover:text-primary duration-300"
               >
@@ -89,7 +71,7 @@ const Footer = () => {
           {/* CLOUMN-2/3 */}
           <div className="col-span-4">
             <div className="flex gap-20">
-              {footerlink.map((product, i) => (
+              {footerLinks.map((product, i) => (
                 <div key={i} className="group relative col-span-2">
                   <p className="text-white text-xl font-semibold mb-9">
                     {product.section}

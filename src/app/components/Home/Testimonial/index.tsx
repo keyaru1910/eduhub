@@ -1,35 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { TestimonialType } from '@/app/types/testimonial'
 import withBasePath from '@/utils/basePath'
-import TestimonialSkeleton from '../../Skeleton/Testimonial'
 import Link from 'next/link'
 
 // CAROUSEL SETTINGS
 
-const Testimonial = () => {
-    const [testimonial, setTestimonial] = useState<TestimonialType[]>([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch(withBasePath('/data/data.json'))
-                if (!res.ok) throw new Error('Failed to fetch')
-                const data = await res.json()
-                setTestimonial(data.TestimonialData)
-            } catch (error) {
-                console.error('Error fetching services:', error)
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchData()
-    }, [])
+const Testimonial = ({ items }: { items: TestimonialType[] }) => {
 
     const settings = {
         dots: true,
@@ -72,11 +52,7 @@ const Testimonial = () => {
                     hàng đầu thế giới.
                 </p>
                 <Slider {...settings} className='testimonial-slider'>
-                    {loading
-                        ? Array.from({ length: 3 }).map((_, i) => (
-                            <TestimonialSkeleton key={i} />
-                        ))
-                        : testimonial.map((items, i) => (
+                    {items.map((items, i) => (
                             <div key={i} className='h-full'>
                                 <div className='m-4 flex h-full flex-col rounded-lg bg-white px-12 pb-10 pt-8 text-center dark:bg-slate-900 dark:text-white'>
                                     <div className={`relative z-0 flex justify-center items-center before:absolute before:bg-[url('/images/testimonial/greenpic.svg')] before:h-6 before:w-6 before:bottom-0 before:z-10 before:left-54%`}>

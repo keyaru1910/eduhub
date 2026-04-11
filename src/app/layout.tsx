@@ -1,9 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/Layout/Header";
-import Footer from "@/app/components/Layout/Footer";
 import ScrollToTop from "@/app/components/ScrollToTop";
-import ThemeProvider from "@/app/components/Providers/ThemeProvider";
+import AppProviders from "@/app/components/Providers/AppProviders";
 import Aoscompo from "@/utils/aos";
 const font = Inter({ subsets: ["latin"] });
 
@@ -16,14 +14,12 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${font.className}`}>
                 <style>{`:root{--banner-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/banner/background.png'); --newsletter-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/newsletter/hands.svg');}`}</style>
-                <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+                <AppProviders>
                     <Aoscompo>
-                        <Header />
                         {children}
-                        <Footer />
                     </Aoscompo>
                     <ScrollToTop />
-                </ThemeProvider>
+                </AppProviders>
             </body>
         </html>
     );

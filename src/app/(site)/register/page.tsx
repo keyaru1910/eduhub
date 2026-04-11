@@ -37,15 +37,15 @@ const RegisterPage = () => {
             </div>
             <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-1'>
               <div className='rounded-2xl bg-cream p-6 dark:bg-slate-800'>
-                <p className='text-lg font-semibold text-black dark:text-white'>Nhan ban tin</p>
+                <p className='text-lg font-semibold text-black dark:text-white'>Nhận bản tin</p>
                 <p className='mt-2 text-sm leading-6 text-black/70 dark:text-slate-300'>
-                  Phu hop khi ban muon theo doi cap nhat, uu dai va noi dung moi.
+                  Phù hợp khi bạn muốn theo dõi cập nhật, ưu đãi và nội dung mới.
                 </p>
               </div>
               <div className='rounded-2xl bg-white p-6 shadow-sm dark:bg-slate-900 dark:shadow-black/20'>
-                <p className='text-lg font-semibold text-black dark:text-white'>Tao tai khoan</p>
+                <p className='text-lg font-semibold text-black dark:text-white'>Tạo tài khoản</p>
                 <p className='mt-2 text-sm leading-6 text-black/70 dark:text-slate-300'>
-                  Phu hop khi ban san sang theo hoc va tuong tac sau hon trong he thong.
+                  Phù hợp khi bạn đã sẵn sàng theo học và tương tác sâu hơn trong hệ thống.
                 </p>
               </div>
             </div>
