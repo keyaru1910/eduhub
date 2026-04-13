@@ -88,6 +88,11 @@ const Header: React.FC = () => {
                                         Admin
                                     </a>
                                 )}
+                                <a
+                                    href='/dashboard'
+                                    className='hidden rounded-lg border border-primary bg-primary px-6 py-2 text-white font-medium duration-300 hover:cursor-pointer hover:bg-transparent hover:text-primary lg:block'>
+                                    Học tập
+                                </a>
                                 <button
                                     className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'
                                     onClick={() => signOut({ callbackUrl: '/' })}>
@@ -204,11 +209,18 @@ const Header: React.FC = () => {
                                 <ThemeToggler />
                             </div>
                             {session?.user ? (
-                                <button
-                                    className='bg-primary text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
-                                    onClick={() => signOut({ callbackUrl: '/' })}>
-                                    Đăng xuất
-                                </button>
+                                <>
+                                    <a
+                                        href='/dashboard'
+                                        className='bg-primary text-center text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'>
+                                        Không gian học tập
+                                    </a>
+                                    <button
+                                        className='bg-primary text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                        onClick={() => signOut({ callbackUrl: '/' })}>
+                                        Đăng xuất
+                                    </button>
+                                </>
                             ) : (
                                 <>
                                     <button

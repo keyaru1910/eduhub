@@ -13,6 +13,7 @@ export const dynamic = 'force-dynamic'
 
 const CoursesPage = async () => {
   const courses = await getPublishedCourses()
+  const categoryCount = new Set(courses.map((course) => course.category)).size
 
   return (
     <>
@@ -31,13 +32,13 @@ const CoursesPage = async () => {
                 Chọn khóa học phù hợp và bắt đầu nhanh hơn
               </h2>
               <p className='mt-4 max-w-2xl text-base leading-7 text-black/70 dark:text-slate-300'>
-                Danh mục hiện tại tập trung vào web, mobile, data và cloud. ục tiêu là giúp bạn chọn đúng hướng học và có thể đi tiếp sang mentor hoặc đăng ký sau do.
+                Danh mục hiện tại tập trung vào web, mobile, data và cloud. Mục tiêu là giúp bạn chọn đúng hướng học, sau đó đi tiếp sang mentor hoặc gửi yêu cầu tư vấn ngay trên cùng một hành trình.
               </p>
               <div className='mt-6 flex flex-wrap gap-3'>
                 <Link
-                  href='/register'
+                  href='/contact'
                   className='rounded-lg border border-primary bg-primary px-5 py-3 font-medium text-white transition duration-300 hover:bg-transparent hover:text-primary'>
-                  Đăng ký nhận cập nhật
+                  Nhận tư vấn lộ trình
                 </Link>
                 <Link
                   href='/mentors'
@@ -48,16 +49,16 @@ const CoursesPage = async () => {
             </div>
             <div className='grid gap-4 sm:grid-cols-3 lg:grid-cols-1'>
               <div className='rounded-2xl border border-primary/15 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-                <p className='text-3xl font-bold text-primary'>4</p>
-                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>Nhóm nội dung chính để bắt đầu từ cơ bản đến thực hành.</p>
+                <p className='text-3xl font-bold text-primary'>{categoryCount}</p>
+                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>Nhóm nội dung chính đang được hiển thị trên site.</p>
               </div>
               <div className='rounded-2xl border border-primary/15 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-                <p className='text-3xl font-bold text-primary'>12</p>
-                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>Mỗi khóa học đã có sẵn khung nội dung và thông tin tổng quan.</p>
+                <p className='text-3xl font-bold text-primary'>{courses.length}</p>
+                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>Khóa học đang sẵn sàng cho bản demo và phần trình diễn admin.</p>
               </div>
               <div className='rounded-2xl border border-primary/15 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
                 <p className='text-3xl font-bold text-primary'>1</p>
-                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>ục tiêu chung: giúp bạn ra quyết định học nhanh và rõ ràng hơn.</p>
+                <p className='mt-2 text-sm text-black/70 dark:text-slate-300'>CTA chính: xem nội dung, chọn mentor phù hợp và gửi yêu cầu tư vấn.</p>
               </div>
             </div>
           </div>
@@ -66,6 +67,7 @@ const CoursesPage = async () => {
       <NamesList
         items={courses.map((course) => ({
           course: course.title,
+          slug: course.slug,
           imageSrc: course.image,
           price: String(course.price),
           profession: course.description,

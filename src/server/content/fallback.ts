@@ -9,7 +9,7 @@ export const fallbackCourses = data.CourseDetailData.map((course) => ({
   image: course.imageSrc,
   price: Number(course.price),
   level: 'Intermediate',
-  duration: '12 buoi hoc',
+  duration: '12 buổi học',
   category: course.category,
   published: true,
 }))

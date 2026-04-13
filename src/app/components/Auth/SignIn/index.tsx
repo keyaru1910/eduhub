@@ -19,14 +19,14 @@ const Signin = () => {
 
     const getErrorMessage = (error?: string) => {
         if (error === 'INVALID_CREDENTIALS') {
-            return 'Email hoac mat khau khong dung.'
+            return 'Email hoặc mật khẩu không đúng.'
         }
 
         if (error === 'DATABASE_NOT_CONFIGURED') {
-            return 'He thong chua duoc cau hinh database.'
+            return 'Hệ thống chưa được cấu hình database.'
         }
 
-        return error || 'Dang nhap that bai.'
+        return error || 'Đăng nhập thất bại.'
     }
 
     const loginUser = (e: any) => {
@@ -42,7 +42,7 @@ const Signin = () => {
                 }
 
                 if (callback?.ok && !callback?.error) {
-                    toast.success('Dang nhap thanh cong')
+                    toast.success('Đăng nhập thành công')
                     setLoading(false)
                     router.push('/')
                 }

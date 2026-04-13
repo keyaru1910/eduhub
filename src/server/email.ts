@@ -22,7 +22,7 @@ export const sendPasswordResetEmail = async (email: string, resetUrl: string) =>
   await transporter.sendMail({
     from: process.env.SMTP_FROM || process.env.SMTP_USER,
     to: email,
-    subject: 'Dat lai mat khau Edu Hub',
-    text: `Su dung lien ket nay de dat lai mat khau: ${resetUrl}`,
+    subject: 'Đặt lại mật khẩu Edu Hub',
+    text: `Sử dụng liên kết này để đặt lại mật khẩu: ${resetUrl}`,
   })
 }

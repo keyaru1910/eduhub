@@ -9,7 +9,9 @@ import {
   mentorRepository,
   testimonialRepository,
 } from './repositories/content'
+import { lessonRepository } from './repositories/lessons'
 import { contactSubmissionsRepository } from './repositories/contact-submissions'
+import type { LessonInput } from '@/types/backend'
 
 export const adminResources = {
   courses: {
@@ -38,4 +40,10 @@ export const adminResources = {
     update: (id: string, data: ContactSubmissionUpdateInput) =>
       contactSubmissionsRepository.update(id, data),
   },
+  lessons: {
+    list: () => lessonRepository.listAdmin(),
+    create: (data: LessonInput) => lessonRepository.create(data),
+    update: (id: string, data: LessonInput) => lessonRepository.update(id, data),
+    remove: (id: string) => lessonRepository.remove(id),
+  }
 }

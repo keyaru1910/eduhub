@@ -10,12 +10,7 @@ const SignUp = () => {
     const router = useRouter()
     const [state, formAction, pending] = useActionState(signupAction, initialActionState)
 
-    useEffect(() => {
-        if (state.success) {
-            router.push('/signin')
-        }
-    }, [router, state.success])
-
+    // Xóa chuyển hướng khi đăng ký thành công để ở lại modal hiện tại
     return (
         <>
             <div className='mb-10 text-center mx-auto inline-block max-w-[160px]'>

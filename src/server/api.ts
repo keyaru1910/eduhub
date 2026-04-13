@@ -11,11 +11,11 @@ export const errorResponse = (message: string, status = 400, code?: string) =>
 
 const mapPrismaError = (error: Prisma.PrismaClientKnownRequestError) => {
   if (error.code === 'P2002') {
-    return new AppError('Du lieu bi trung voi ban ghi da ton tai.', 409, 'UNIQUE_CONSTRAINT')
+    return new AppError('Dữ liệu bị trùng với bản ghi đã tồn tại.', 409, 'UNIQUE_CONSTRAINT')
   }
 
   if (error.code === 'P2025') {
-    return new AppError('Khong tim thay ban ghi.', 404, 'NOT_FOUND')
+    return new AppError('Không tìm thấy bản ghi.', 404, 'NOT_FOUND')
   }
 
   return internalError()

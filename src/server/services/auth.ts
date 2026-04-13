@@ -30,7 +30,7 @@ export const authService = {
     const existingUser = await usersRepository.findByEmail(input.email)
 
     if (existingUser) {
-      throw conflict('Email da duoc su dung.', 'EMAIL_ALREADY_EXISTS')
+      throw conflict('Email đã được sử dụng.', 'EMAIL_ALREADY_EXISTS')
     }
 
     await usersRepository.createStudent({
@@ -74,7 +74,7 @@ export const authService = {
 
     if (!resetToken || resetToken.usedAt || resetToken.expiresAt.getTime() < Date.now()) {
       throw badRequest(
-        'Token dat lai mat khau khong hop le hoac da het han.',
+        'Token đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.',
         'INVALID_RESET_TOKEN',
       )
     }

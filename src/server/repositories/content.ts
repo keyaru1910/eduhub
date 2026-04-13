@@ -12,6 +12,10 @@ export const courseRepository = {
   update: (id: string, data: CourseInput) =>
     prisma.course.update({ where: { id }, data }),
   remove: (id: string) => prisma.course.delete({ where: { id } }),
+  findBySlug: (slug: string) =>
+    prisma.course.findUnique({
+      where: { slug },
+    }),
 }
 
 export const mentorRepository = {

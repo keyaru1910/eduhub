@@ -17,10 +17,11 @@ interface Name {
     | 'mobiledevelopment'
     | 'datascience'
     | 'cloudcomputing'
+    slug?: string
 }
 
 const formatVndPrice = (price: string) =>
-    `${new Intl.NumberFormat('vi-VN').format(Number(price))} đ`
+    `${new Intl.NumberFormat('vi-VN').format(Number(price))}\u00A0đ`
 
 const NamesList = ({ items }: { items: CourseDetailType[] }) => {
 
@@ -71,15 +72,15 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
                 <div className='p-4 flex flex-col justify-between gap-5 flex-1'>
                     <div className="flex flex-col gap-5">
                         <div className='flex items-center justify-between'>
-                            <p className='block font-normal text-gray-900 dark:text-white'>{name.course}</p>
-                            <div className='block text-lg font-semibold text-success border-solid border-2 border-success rounded-md px-1'>
+                            <p className='block font-normal text-gray-900 dark:text-white line-clamp-2 pr-2'>{name.course}</p>
+                            <div className='shrink-0 whitespace-nowrap text-lg font-semibold text-success border-solid border-2 border-success rounded-md px-2 py-0.5'>
                                 <p>{formatVndPrice(name.price)}</p>
                             </div>
                         </div>
-                        <Link href={'/'}>
+                        <Link href={name.slug ? `/courses/${name.slug}` : '/'}>
                             <p
                                 aria-hidden='true'
-                                className='text-xl font-semibold group-hover:cursor-pointer group-hover:text-primary dark:text-white'>
+                                className='text-xl font-semibold group-hover:cursor-pointer group-hover:text-primary dark:text-white line-clamp-2'>
                                 {name.profession}
                             </p>
                         </Link>

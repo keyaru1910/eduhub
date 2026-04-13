@@ -75,3 +75,19 @@ export type ContactSubmissionAdminItem = ContactSubmissionInput & {
   note: string | null
   createdAt: Date
 }
+
+export type EnrollmentInput = {
+  userId: string
+  courseId: string
+  status: string
+}
+
+export type LessonInput = {
+  courseId: string
+  title: string
+  slug: string
+  content: string
+  videoUrl?: string
+  order: number
+  published: boolean
+}

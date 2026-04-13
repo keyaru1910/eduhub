@@ -40,11 +40,11 @@ const Mentor = ({ items }: { items: MentorType[] }) => {
         <section id='mentors-section'>
             <div className='container'>
                 <div className='mb-12 flex flex-col justify-between gap-5 sm:flex-row sm:items-center'>
-                    <h2 className='font-bold tracking-tight text-slate-950 dark:text-white'>Gặp gỡ Mentor của chúng tôi</h2>
+                    <h2 className='font-bold tracking-tight text-slate-950 dark:text-white'>Gặp gỡ mentor của chúng tôi</h2>
                     <Link
                         href='/mentors'
                         className='inline-flex cursor-pointer rounded-sm border border-primary bg-transparent px-4 py-3 font-medium text-primary duration-300 hover:border-transparent hover:bg-primary hover:text-white'>
-                        Khám phá những Mentor
+                        Khám phá mentor
                     </Link>
                 </div>
 

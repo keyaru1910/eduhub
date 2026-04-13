@@ -28,8 +28,11 @@ const AdminPage = async () => {
         Dashboard
       </p>
       <h2 className='mt-3 text-3xl font-bold text-slate-950 dark:text-white'>
-        Tong quan noi dung
+        Tổng quan nội dung demo
       </h2>
+      <p className='mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300'>
+        Theo dõi nhanh các khối nội dung chính của Edu Hub và kiểm tra xem luồng demo từ trang public sang quản trị lead đã đủ dữ liệu hay chưa.
+      </p>
       <div className='mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
         {stats.map((stat) => (
           <div
@@ -42,6 +45,24 @@ const AdminPage = async () => {
             </p>
           </div>
         ))}
+      </div>
+      <div className='mt-8 grid gap-4 lg:grid-cols-2'>
+        <div className='rounded-2xl bg-primary/5 p-5'>
+          <h3 className='text-lg font-semibold text-slate-950 dark:text-white'>
+            Luồng demo đề xuất
+          </h3>
+          <p className='mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300'>
+            Trang chủ → Khóa học hoặc Mentor → Liên hệ → Admin thấy lead mới → cập nhật trạng thái xử lý.
+          </p>
+        </div>
+        <div className='rounded-2xl bg-slate-50 p-5 dark:bg-slate-950'>
+          <h3 className='text-lg font-semibold text-slate-950 dark:text-white'>
+            Kiểm tra trước khi thuyết trình
+          </h3>
+          <p className='mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300'>
+            Bảo đảm mỗi mục đều có dữ liệu đã publish và ít nhất một lead mẫu để màn quản trị không bị trống.
+          </p>
+        </div>
       </div>
     </section>
   )

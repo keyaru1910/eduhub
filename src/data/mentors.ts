@@ -72,7 +72,7 @@ export const mentors: MentorType[] = [
   {
     slug: 'cha-mu-hee',
     name: 'Cha Mu Hee',
-    role: 'Web Development / Web Design',
+    role: 'Web Development',
     imageSrc: '/images/mentor/girl2.jpg',
     imageAlt: 'Ảnh mentor Cha Mu Hee',
     shortBio: 'Kết hợp tư duy thiết kế và lập trình để giúp học viên xây sản phẩm web hoàn chỉnh.',

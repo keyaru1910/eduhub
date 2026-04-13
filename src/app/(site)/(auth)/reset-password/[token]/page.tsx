@@ -3,7 +3,7 @@ import Breadcrumb from '@/app/components/Common/Breadcrumb'
 import ResetPassword from '@/app/components/Auth/ResetPassword'
 
 export const metadata: Metadata = {
-  title: 'Dat lai mat khau | Edu Hub',
+  title: 'Đặt lại mật khẩu | Edu Hub',
 }
 
 type ResetPasswordPageProps = {
@@ -15,7 +15,7 @@ const ResetPasswordPage = async ({ params }: ResetPasswordPageProps) => {
 
   return (
     <>
-      <Breadcrumb pageName='Dat lai mat khau' pageDescription='Nhap mat khau moi de hoan tat qua trinh khoi phuc tai khoan.' />
+      <Breadcrumb pageName='Đặt lại mật khẩu' pageDescription='Nhập mật khẩu mới để hoàn tất quá trình khôi phục tài khoản.' />
       <ResetPassword token={token} />
     </>
   )

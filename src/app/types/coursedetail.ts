@@ -8,4 +8,5 @@ export type CourseDetailType = {
     | 'webdevelopment'
     | 'datascience'
     | 'cloudcomputing'
+  slug?: string
 }

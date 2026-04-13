@@ -26,7 +26,7 @@ const ContactPage = () => {
                 Bạn cần tư vấn khóa học, mentor hay cách đăng ký?
               </h2>
               <p className='mt-4 text-base leading-7 text-black/70 dark:text-slate-300'>
-                Trang liên hệ này nên đóng vai trò điểm chốt cho người dùng cần trao đổi trước khi quyết định. Vi vay toi bo sung them cac loi di nhanh sang khoa hoc va dang ky.
+                Đây là điểm chốt của luồng demo: sau khi xem khóa học, mentor và cảm nhận, người dùng có thể để lại nhu cầu để đội ngũ xử lý ngay trong khu vực admin.
               </p>
               <div className='mt-6 flex flex-wrap gap-3'>
                 <Link
@@ -35,21 +35,21 @@ const ContactPage = () => {
                   Xem khóa học
                 </Link>
                 <Link
-                  href='/register'
+                  href='/mentors'
                   className='rounded-lg border border-primary bg-primary px-5 py-3 font-medium text-white transition duration-300 hover:bg-transparent hover:text-primary'>
-                  Đi tới trang đăng ký
+                  Xem đội ngũ mentor
                 </Link>
               </div>
             </div>
             <div className='grid gap-4 sm:grid-cols-2'>
               <div className='rounded-2xl border border-primary/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-                <p className='text-lg font-semibold text-black dark:text-white'>Tu van lo trinh</p>
+                <p className='text-lg font-semibold text-black dark:text-white'>Tư vấn lộ trình</p>
                 <p className='mt-2 text-sm leading-6 text-black/70 dark:text-slate-300'>
                   Gửi nhu cầu học tập để đội ngũ phản hồi theo hướng phù hợp.
                 </p>
               </div>
               <div className='rounded-2xl border border-primary/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-                <p className='text-lg font-semibold text-black dark:text-white'>Hop tac</p>
+                <p className='text-lg font-semibold text-black dark:text-white'>Hợp tác</p>
                 <p className='mt-2 text-sm leading-6 text-black/70 dark:text-slate-300'>
                   Dùng cho các nhu cầu mentor, đối tác nội dung hoặc hỗ trợ sự kiện.
                 </p>

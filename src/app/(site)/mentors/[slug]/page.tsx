@@ -49,7 +49,7 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
             <div className='overflow-hidden rounded-3xl bg-slate-100 dark:bg-slate-800'>
               <Image
                 src={withBasePath(mentor.image)}
-                alt={`Anh mentor ${mentor.name}`}
+                alt={`Ảnh mentor ${mentor.name}`}
                 width={900}
                 height={1000}
                 className='h-full w-full object-cover'
@@ -57,7 +57,7 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
             </div>
             <div className='flex flex-col justify-center'>
               <p className='text-sm font-semibold uppercase tracking-[0.2em] text-primary'>
-                Mentor profile
+                Hồ sơ mentor
               </p>
               <h1 className='mt-3 text-4xl font-bold tracking-tight text-black dark:text-white'>
                 {mentor.name}
@@ -86,12 +86,12 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
                 <Link
                   href='/contact'
                   className='rounded-lg border border-primary bg-primary px-5 py-3 font-medium text-white transition duration-300 hover:bg-transparent hover:text-primary'>
-                  Liên hệ để được tư vấn
+                  Liên hệ để học với mentor này
                 </Link>
                 <Link
-                  href='/mentors'
+                  href='/courses'
                   className='rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white'>
-                  Xem tất cả mentor
+                  Xem khóa học phù hợp
                 </Link>
               </div>
             </div>
@@ -106,7 +106,7 @@ const MentorDetailPage = async ({ params }: MentorDetailPageProps) => {
                 {mentor.shortBio}
               </p>
               <p className='mt-4 text-base leading-8 text-black/70 dark:text-slate-300'>
-                Mentor này phù hợp với học viên muốn học theo hướng thực chiến, có người review tiến độ và định hướng cách áp dụng kỹ năng vào dự án cụ thể.
+                Mentor này phù hợp với học viên muốn học theo hướng thực chiến, có người theo sát tiến độ và định hướng cách áp dụng kỹ năng vào dự án cụ thể.
               </p>
             </div>
 

@@ -11,7 +11,10 @@ import { hasDatabaseUrl } from './db'
 import { internalError } from './errors'
 import { authService } from './services/auth'
 import { contactSubmissionsService } from './services/contact-submissions'
+import { enrollmentService } from './services/enrollment'
+import { getAuthSession } from './auth/session'
 import type { ActionState } from '@/types/backend'
+import { revalidatePath } from 'next/cache'
 
 export const submitContactAction = async (
   _prevState: ActionState,
@@ -28,13 +31,13 @@ export const submitContactAction = async (
 
     return {
       success: true,
-      message: 'Cam on ban da lien he. Chung toi se phan hoi som.',
+      message: 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm.',
     }
   } catch (error) {
     const normalized = normalizeError(error)
     return {
       success: false,
-      message: normalized.message || 'Khong the gui lien he luc nay.',
+      message: normalized.message || 'Không thể gửi liên hệ lúc này.',
       code: normalized.code,
     }
   }
@@ -50,13 +53,13 @@ export const signupAction = async (
 
     return {
       success: true,
-      message: 'Dang ky thanh cong. Ban co the dang nhap ngay bay gio.',
+      message: 'Đăng ký thành công. Bạn có thể đăng nhập ngay bây giờ.',
     }
   } catch (error) {
     const normalized = normalizeError(error)
     return {
       success: false,
-      message: normalized.message || 'Dang ky that bai.',
+      message: normalized.message || 'Đăng ký thất bại.',
       code: normalized.code,
     }
   }
@@ -72,13 +75,13 @@ export const forgotPasswordAction = async (
 
     return {
       success: true,
-      message: 'Neu email ton tai, chung toi da gui lien ket dat lai mat khau.',
+      message: 'Nếu email tồn tại, chúng tôi đã gửi liên kết đặt lại mật khẩu.',
     }
   } catch (error) {
     const normalized = normalizeError(error)
     return {
       success: false,
-      message: normalized.message || 'Khong the xu ly yeu cau.',
+      message: normalized.message || 'Không thể xử lý yêu cầu.',
       code: normalized.code,
     }
   }
@@ -95,13 +98,46 @@ export const resetPasswordAction = async (
 
     return {
       success: true,
-      message: 'Cap nhat mat khau thanh cong. Hay dang nhap lai.',
+      message: 'Cập nhật mật khẩu thành công. Hãy đăng nhập lại.',
     }
   } catch (error) {
     const normalized = normalizeError(error)
     return {
       success: false,
-      message: normalized.message || 'Khong the dat lai mat khau.',
+      message: normalized.message || 'Không thể đặt lại mật khẩu.',
+      code: normalized.code,
+    }
+  }
+}
+
+export const enrollAction = async (
+  courseSlug: string,
+  _prevState: ActionState,
+): Promise<ActionState> => {
+  try {
+    const session = await getAuthSession()
+    if (!session?.user?.id) {
+      return {
+        success: false,
+        message: 'Bạn cần đăng nhập để đăng ký khóa học.',
+        code: 'UNAUTHORIZED',
+      }
+    }
+
+    await enrollmentService.enroll(session.user.id, courseSlug)
+
+    revalidatePath(`/courses/${courseSlug}`)
+    revalidatePath('/dashboard')
+
+    return {
+      success: true,
+      message: 'Chúc mừng! Bạn đã đăng ký khóa học thành công.',
+    }
+  } catch (error) {
+    const normalized = normalizeError(error)
+    return {
+      success: false,
+      message: normalized.message || 'Không thể đăng ký khóa học lúc này.',
       code: normalized.code,
     }
   }

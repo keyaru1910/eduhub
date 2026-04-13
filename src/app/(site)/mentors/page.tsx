@@ -13,59 +13,8 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic';
 
-const hasMentorImage = (
-  mentor: unknown,
-): mentor is {
-  image: string;
-  name: string;
-  slug: string;
-  title: string;
-  shortBio: string;
-  yearsOfExperience: number;
-  expertise: string[];
-} =>
-  typeof mentor === "object" &&
-  mentor !== null &&
-  "image" in mentor &&
-  typeof mentor.image === "string";
-
-const hasCardImage = (
-  mentor: unknown,
-): mentor is {
-  imageSrc: string;
-  imageAlt?: string;
-} =>
-  typeof mentor === "object" &&
-  mentor !== null &&
-  "imageSrc" in mentor &&
-  typeof mentor.imageSrc === "string";
-
 const MentorsPage = async () => {
   const mentors = await getPublishedMentors();
-  const visibleMentors = mentors.slice(0, 10);
-  const placeholderMentors = Array.from({
-    length: Math.max(0, 10 - visibleMentors.length),
-  }).map((_, index) => {
-    const placeholderImages = [
-      "/images/mentor/boy7.jpg",
-      "/images/mentor/boy6.jpg",
-      "/images/mentor/girl3.jpg",
-      "/images/mentor/boy5.jpg",
-    ];
-
-    return {
-      slug: `coming-soon-${index + 1}`,
-      name: `Mentor đang cập nhật ${index + 1}`,
-      title: "Thông tin sẽ được bổ sung sau",
-      shortBio:
-        "Vị trí này đang chờ cập nhật hồ sơ mentor mới để hoàn thiện danh sách hiển thị.",
-      yearsOfExperience: 0,
-      expertise: [] as string[],
-      imageSrc: placeholderImages[index],
-      imageAlt: `Ảnh mentor ${index + 7}`,
-    };
-  });
-  const mentorList = [...visibleMentors, ...placeholderMentors];
 
   return (
     <>
@@ -93,16 +42,16 @@ const MentorsPage = async () => {
               </div>
               <div className="flex flex-wrap gap-3 lg:justify-end">
                 <Link
-                  href="/courses"
-                  className="rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
-                >
-                  Xem khóa học
-                </Link>
-                <Link
                   href="/contact"
                   className="rounded-lg border border-primary bg-primary px-5 py-3 font-medium text-white transition duration-300 hover:bg-transparent hover:text-primary"
                 >
-                  Liên hệ để được tư vấn
+                  Liên hệ để chọn mentor
+                </Link>
+                <Link
+                  href="/courses"
+                  className="rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
+                >
+                  Xem khóa học phù hợp
                 </Link>
               </div>
             </div>
@@ -111,32 +60,46 @@ const MentorsPage = async () => {
       </section>
       <section className="pb-20">
         <div className="container mx-auto max-w-7xl px-4">
-          <div className="space-y-5">
-            {mentorList.map((mentor, index) => {
-              const isRealMentor = hasMentorImage(mentor);
-              const isPlaceholder = !isRealMentor;
-              const mentorName =
-                "name" in mentor && typeof mentor.name === "string"
-                  ? mentor.name
-                  : "mentor";
-              const displayImage = isRealMentor
-                ? mentor.image
-                : hasCardImage(mentor)
-                  ? mentor.imageSrc
-                  : undefined;
-              const displayImageAlt = isRealMentor
-                ? `Ảnh mentor ${mentorName}`
-                : hasCardImage(mentor)
-                  ? mentor.imageAlt ?? `Ảnh mentor ${mentorName}`
-                  : `Ảnh mentor ${mentorName}`;
-
-              const content = (
-                <div className="grid gap-6 rounded-[28px] border border-primary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md md:grid-cols-[220px_minmax(0,1fr)]">
-                  {displayImage ? (
+          {mentors.length === 0 ? (
+            <div className="rounded-[28px] border border-dashed border-primary/25 bg-primary/5 p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                Mentor matching
+              </p>
+              <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-950">
+                Danh sách mentor đang được cập nhật
+              </h3>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-black/70">
+                Bản demo hiện chưa có mentor nào ở trạng thái hiển thị. Bạn có
+                thể thêm dữ liệu trong admin hoặc liên hệ để đội ngũ tư vấn theo
+                nhu cầu học tập.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="rounded-lg border border-primary bg-primary px-5 py-3 font-medium text-white transition duration-300 hover:bg-transparent hover:text-primary"
+                >
+                  Gửi yêu cầu tư vấn
+                </Link>
+                <Link
+                  href="/admin/mentors"
+                  className="rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
+                >
+                  Cập nhật mentor trong admin
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-5">
+              {mentors.map((mentor, index) => (
+                <div
+                  key={mentor.slug}
+                  className="grid gap-6 rounded-[28px] border border-primary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md md:grid-cols-[220px_minmax(0,1fr)]"
+                >
+                  {mentor.image ? (
                     <div className="overflow-hidden rounded-2xl bg-slate-100">
                       <Image
-                        src={withBasePath(displayImage)}
-                        alt={displayImageAlt}
+                        src={withBasePath(mentor.image)}
+                        alt={`Ảnh mentor ${mentor.name}`}
                         width={440}
                         height={440}
                         className="h-[220px] w-full object-cover object-center"
@@ -164,9 +127,7 @@ const MentorsPage = async () => {
                           </p>
                         </div>
                         <div className="rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-                          {isPlaceholder
-                            ? "Đang cập nhật"
-                            : `${mentor.yearsOfExperience}+ năm kinh nghiệm`}
+                          {`${mentor.yearsOfExperience}+ năm kinh nghiệm`}
                         </div>
                       </div>
                       <p className="max-w-3xl text-base leading-7 text-black/70">
@@ -176,42 +137,28 @@ const MentorsPage = async () => {
 
                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                       <div className="flex flex-wrap gap-2">
-                        {isPlaceholder ? (
-                          <span className="rounded-full border border-dashed border-slate-300 px-3 py-2 text-sm text-slate-500">
-                            Hồ sơ đang cập nhật
-                          </span>
-                        ) : (
-                          mentor.expertise.slice(0, 4).map((item) => (
+                        {mentor.expertise.slice(0, 4).map((item) => (
                             <span
                               key={item}
                               className="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-700"
                             >
                               {item}
                             </span>
-                          ))
-                        )}
+                          ))}
                       </div>
 
-                      {!isPlaceholder && (
-                        <Link
-                          href={`/mentors/${mentor.slug}`}
-                          className="inline-flex w-fit rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
-                        >
-                          Xem hồ sơ mentor
-                        </Link>
-                      )}
+                      <Link
+                        href={`/mentors/${mentor.slug}`}
+                        className="inline-flex w-fit rounded-lg border border-primary px-5 py-3 font-medium text-primary transition duration-300 hover:bg-primary hover:text-white"
+                      >
+                        Xem hồ sơ mentor
+                      </Link>
                     </div>
                   </div>
                 </div>
-              );
-
-              if (isPlaceholder) {
-                return <div key={mentor.slug}>{content}</div>;
-              }
-
-              return <div key={mentor.slug}>{content}</div>;
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </>

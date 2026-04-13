@@ -32,7 +32,7 @@ const parseRequiredNumber = (value: string, fieldLabel: string) => {
   const parsed = Number(value)
 
   if (!value || Number.isNaN(parsed)) {
-    throw unprocessable(`${fieldLabel} khong hop le.`, 'INVALID_NUMBER')
+    throw unprocessable(`${fieldLabel} không hợp lệ.`, 'INVALID_NUMBER')
   }
 
   return parsed
@@ -50,29 +50,29 @@ export const normalizeEmail = (email: string) => email.trim().toLowerCase()
 
 const validateEmailAddress = (email: string) => {
   if (!validateEmail(email)) {
-    throw unprocessable('Email khong hop le.', 'INVALID_EMAIL')
+    throw unprocessable('Email không hợp lệ.', 'INVALID_EMAIL')
   }
 
   return email
 }
 
 export const validateContactInput = (formData: FormData): ContactSubmissionInput => {
-  const firstName = ensureNonEmpty(asString(formData.get('firstname')), 'Vui long nhap ten.')
-  const lastName = ensureNonEmpty(asString(formData.get('lastname')), 'Vui long nhap ho.')
+  const firstName = ensureNonEmpty(asString(formData.get('firstname')), 'Vui lòng nhập tên.')
+  const lastName = ensureNonEmpty(asString(formData.get('lastname')), 'Vui lòng nhập họ.')
   const email = validateEmailAddress(normalizeEmail(asString(formData.get('email'))))
-  const phone = ensureNonEmpty(asString(formData.get('phnumber')), 'Vui long nhap so dien thoai.')
-  const message = ensureNonEmpty(asString(formData.get('Message')), 'Vui long nhap noi dung lien he.')
+  const phone = ensureNonEmpty(asString(formData.get('phnumber')), 'Vui lòng nhập số điện thoại.')
+  const message = ensureNonEmpty(asString(formData.get('Message')), 'Vui lòng nhập nội dung liên hệ.')
 
   return { firstName, lastName, email, phone, message }
 }
 
 export const validateSignupInput = (formData: FormData) => {
-  const name = ensureNonEmpty(asString(formData.get('name')), 'Vui long nhap ten.')
+  const name = ensureNonEmpty(asString(formData.get('name')), 'Vui lòng nhập tên.')
   const email = validateEmailAddress(normalizeEmail(asString(formData.get('email'))))
   const password = asString(formData.get('password'))
 
   if (password.length < 8) {
-    throw unprocessable('Mat khau phai tu 8 ky tu.', 'INVALID_PASSWORD')
+    throw unprocessable('Mật khẩu phải từ 8 ký tự.', 'INVALID_PASSWORD')
   }
 
   return { name, email, password }
@@ -89,56 +89,56 @@ export const validateResetPasswordInput = (formData: FormData) => {
   const confirmPassword = asString(formData.get('confirmPassword'))
 
   if (password.length < 8) {
-    throw unprocessable('Mat khau moi phai tu 8 ky tu.', 'INVALID_PASSWORD')
+    throw unprocessable('Mật khẩu mới phải từ 8 ký tự.', 'INVALID_PASSWORD')
   }
 
   if (password !== confirmPassword) {
-    throw unprocessable('Mat khau nhap lai khong khop.', 'PASSWORD_CONFIRMATION_MISMATCH')
+    throw unprocessable('Mật khẩu nhập lại không khớp.', 'PASSWORD_CONFIRMATION_MISMATCH')
   }
 
   return { password }
 }
 
 export const validateCourseInput = (formData: FormData): CourseInput => {
-  const title = ensureNonEmpty(asString(formData.get('title')), 'Title khong duoc de trong.')
+  const title = ensureNonEmpty(asString(formData.get('title')), 'Tiêu đề không được để trống.')
   const slug = ensureNonEmpty(
     toSlug(asString(formData.get('slug')) || title),
-    'Slug khong hop le.',
+    'Slug không hợp lệ.',
   )
   const description = ensureNonEmpty(
     asString(formData.get('description')),
-    'Description khong duoc de trong.',
+    'Mô tả không được để trống.',
   )
-  const image = ensureNonEmpty(asString(formData.get('image')), 'Image URL khong duoc de trong.')
+  const image = ensureNonEmpty(asString(formData.get('image')), 'URL ảnh không được để trống.')
   const price = parseRequiredNumber(asString(formData.get('price')), 'Price')
-  const level = ensureNonEmpty(asString(formData.get('level')), 'Level khong duoc de trong.')
+  const level = ensureNonEmpty(asString(formData.get('level')), 'Trình độ không được để trống.')
   const duration = ensureNonEmpty(
     asString(formData.get('duration')),
-    'Duration khong duoc de trong.',
+    'Thời lượng không được để trống.',
   )
   const category = ensureNonEmpty(
     asString(formData.get('category')),
-    'Category khong duoc de trong.',
+    'Danh mục không được để trống.',
   )
   const published = toBoolean(formData.get('published'))
 
   if (price < 0) {
-    throw unprocessable('Price phai lon hon hoac bang 0.', 'INVALID_PRICE')
+    throw unprocessable('Học phí phải lớn hơn hoặc bằng 0.', 'INVALID_PRICE')
   }
 
   return { title, slug, description, image, price, level, duration, category, published }
 }
 
 export const validateMentorInput = (formData: FormData): MentorInput => {
-  const name = ensureNonEmpty(asString(formData.get('name')), 'Name khong duoc de trong.')
-  const slug = ensureNonEmpty(toSlug(asString(formData.get('slug')) || name), 'Slug khong hop le.')
-  const title = ensureNonEmpty(asString(formData.get('title')), 'Title khong duoc de trong.')
+  const name = ensureNonEmpty(asString(formData.get('name')), 'Tên không được để trống.')
+  const slug = ensureNonEmpty(toSlug(asString(formData.get('slug')) || name), 'Slug không hợp lệ.')
+  const title = ensureNonEmpty(asString(formData.get('title')), 'Chức danh không được để trống.')
   const shortBio = ensureNonEmpty(
     asString(formData.get('shortBio')),
-    'Short bio khong duoc de trong.',
+    'Mô tả ngắn không được để trống.',
   )
-  const bio = ensureNonEmpty(asString(formData.get('bio')), 'Bio khong duoc de trong.')
-  const image = ensureNonEmpty(asString(formData.get('image')), 'Image URL khong duoc de trong.')
+  const bio = ensureNonEmpty(asString(formData.get('bio')), 'Tiểu sử không được để trống.')
+  const image = ensureNonEmpty(asString(formData.get('image')), 'URL ảnh không được để trống.')
   const expertise = splitLines(asString(formData.get('expertise')))
   const experience = splitLines(asString(formData.get('experience')))
   const yearsOfExperience = parseRequiredNumber(
@@ -149,13 +149,13 @@ export const validateMentorInput = (formData: FormData): MentorInput => {
 
   if (yearsOfExperience < 0) {
     throw unprocessable(
-      'Years of experience phai lon hon hoac bang 0.',
+      'Số năm kinh nghiệm phải lớn hơn hoặc bằng 0.',
       'INVALID_EXPERIENCE',
     )
   }
 
   if (expertise.length === 0 || experience.length === 0) {
-    throw unprocessable('Expertise va experience phai co it nhat mot dong.', 'EMPTY_LIST')
+    throw unprocessable('Kỹ năng và kinh nghiệm phải có ít nhất một dòng.', 'EMPTY_LIST')
   }
 
   return {
@@ -173,15 +173,15 @@ export const validateMentorInput = (formData: FormData): MentorInput => {
 }
 
 export const validateTestimonialInput = (formData: FormData): TestimonialInput => {
-  const name = ensureNonEmpty(asString(formData.get('name')), 'Name khong duoc de trong.')
-  const role = ensureNonEmpty(asString(formData.get('role')), 'Role khong duoc de trong.')
-  const avatar = ensureNonEmpty(asString(formData.get('avatar')), 'Avatar URL khong duoc de trong.')
-  const content = ensureNonEmpty(asString(formData.get('content')), 'Content khong duoc de trong.')
+  const name = ensureNonEmpty(asString(formData.get('name')), 'Tên không được để trống.')
+  const role = ensureNonEmpty(asString(formData.get('role')), 'Vai trò không được để trống.')
+  const avatar = ensureNonEmpty(asString(formData.get('avatar')), 'URL avatar không được để trống.')
+  const content = ensureNonEmpty(asString(formData.get('content')), 'Nội dung không được để trống.')
   const rating = parseRequiredNumber(asString(formData.get('rating')), 'Rating')
   const published = toBoolean(formData.get('published'))
 
   if (rating < 1 || rating > 5) {
-    throw unprocessable('Rating phai nam trong khoang 1 den 5.', 'INVALID_RATING')
+    throw unprocessable('Đánh giá phải nằm trong khoảng 1 đến 5.', 'INVALID_RATING')
   }
 
   return { name, role, avatar, content, rating, published }
@@ -194,7 +194,7 @@ export const validateContactSubmissionUpdateInput = (
   const noteValue = asString(formData.get('note'))
 
   if (!['NEW', 'CONTACTED', 'CLOSED'].includes(status)) {
-    throw badRequest('Trang thai lead khong hop le.', 'INVALID_CONTACT_STATUS')
+    throw badRequest('Trạng thái lead không hợp lệ.', 'INVALID_CONTACT_STATUS')
   }
 
   return {

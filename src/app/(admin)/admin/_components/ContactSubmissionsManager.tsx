@@ -10,18 +10,33 @@ type ContactSubmissionsManagerProps = {
 const statusOptions: ContactSubmissionStatus[] = ['NEW', 'CONTACTED', 'CLOSED']
 
 const statusLabel: Record<ContactSubmissionStatus, string> = {
-  NEW: 'Moi',
-  CONTACTED: 'Da lien he',
-  CLOSED: 'Da dong',
+  NEW: 'Mới',
+  CONTACTED: 'Đã liên hệ',
+  CLOSED: 'Đã đóng',
 }
 
 const ContactSubmissionsManager = ({
   initialItems,
 }: ContactSubmissionsManagerProps) => {
   const [items, setItems] = useState(initialItems)
+  const [activeFilter, setActiveFilter] = useState<ContactSubmissionStatus | 'ALL'>('ALL')
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
   const [isPending, startTransition] = useTransition()
+
+  const visibleItems =
+    activeFilter === 'ALL'
+      ? items
+      : items.filter((item) => item.status === activeFilter)
+
+  const filterChips = [
+    { value: 'ALL' as const, label: 'Tất cả', count: items.length },
+    ...statusOptions.map((status) => ({
+      value: status,
+      label: statusLabel[status],
+      count: items.filter((item) => item.status === status).length,
+    })),
+  ]
 
   const updateItem = (id: string, field: 'status' | 'note', value: string) => {
     setItems((current) =>
@@ -51,12 +66,12 @@ const ContactSubmissionsManager = ({
       const result = await response.json()
 
       if (!response.ok || !result.success) {
-        setError(result.error || 'Khong the cap nhat lead.')
+        setError(result.error || 'Không thể cập nhật lead.')
         return
       }
 
       setItems((current) => current.map((entry) => (entry.id === id ? result.data : entry)))
-      setMessage('Cap nhat lead thanh cong.')
+      setMessage('Cập nhật lead thành công.')
     })
   }
 
@@ -66,14 +81,30 @@ const ContactSubmissionsManager = ({
         Contact Leads
       </p>
       <h2 className='mt-3 text-3xl font-bold text-slate-950 dark:text-white'>
-        Quan ly lien he tu form public
+        Quản lý liên hệ từ form public
       </h2>
       <p className='mt-2 text-sm text-slate-600 dark:text-slate-300'>
-        Theo doi lead moi, them ghi chu noi bo va cap nhat trang thai xu ly.
+        Theo dõi lead mới, thêm ghi chú nội bộ và cập nhật trạng thái xử lý ngay trong một màn hình.
       </p>
+      <div className='mt-6 flex flex-wrap gap-3'>
+        {filterChips.map((chip) => (
+          <button
+            key={chip.value}
+            type='button'
+            onClick={() => setActiveFilter(chip.value)}
+            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              activeFilter === chip.value
+                ? 'bg-primary text-white'
+                : 'border border-slate-200 text-slate-600 dark:border-white/10 dark:text-slate-300'
+            }`}
+          >
+            {chip.label} ({chip.count})
+          </button>
+        ))}
+      </div>
 
       <div className='mt-8 grid gap-4'>
-        {items.map((item) => (
+        {visibleItems.map((item) => (
           <article
             key={item.id}
             className='rounded-2xl border border-slate-200 p-5 dark:border-white/10'
@@ -102,7 +133,7 @@ const ContactSubmissionsManager = ({
             <div className='mt-5 grid gap-4 lg:grid-cols-[220px_1fr_auto]'>
               <label className='text-sm'>
                 <span className='mb-2 block font-medium text-slate-700 dark:text-slate-200'>
-                  Trang thai
+                  Trạng thái
                 </span>
                 <select
                   value={item.status}
@@ -119,7 +150,7 @@ const ContactSubmissionsManager = ({
 
               <label className='text-sm'>
                 <span className='mb-2 block font-medium text-slate-700 dark:text-slate-200'>
-                  Ghi chu noi bo
+                  Ghi chú nội bộ
                 </span>
                 <textarea
                   rows={3}
@@ -136,17 +167,24 @@ const ContactSubmissionsManager = ({
                   disabled={isPending}
                   className='rounded-2xl border border-primary bg-primary px-5 py-3 font-medium text-white disabled:cursor-not-allowed disabled:opacity-70'
                 >
-                  Luu
+                  Lưu
                 </button>
               </div>
             </div>
           </article>
         ))}
 
-        {items.length === 0 && (
-          <p className='text-sm text-slate-500 dark:text-slate-300'>
-            Chua co lead nao tu form lien he.
-          </p>
+        {visibleItems.length === 0 && (
+          <div className='rounded-2xl border border-dashed border-primary/25 bg-primary/5 p-6'>
+            <p className='text-lg font-semibold text-slate-950 dark:text-white'>
+              {items.length === 0 ? 'Chưa có lead nào từ form liên hệ' : 'Không có lead trong nhóm trạng thái này'}
+            </p>
+            <p className='mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300'>
+              {items.length === 0
+                ? 'Hãy gửi thử một form liên hệ ở trang public để hoàn thiện luồng demo end-to-end.'
+                : 'Thử chuyển bộ lọc hoặc cập nhật trạng thái lead ở nhóm khác.'}
+            </p>
+          </div>
         )}
       </div>
 

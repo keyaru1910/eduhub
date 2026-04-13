@@ -44,12 +44,11 @@ const Testimonial = ({ items }: { items: TestimonialType[] }) => {
                     <Link
                         href='/testimonials'
                         className='bg-transparent inline-flex cursor-pointer hover:bg-primary text-primary font-semibold hover:text-white py-3 px-4 border border-primary hover:border-transparent rounded-sm duration-300'>
-                        Gửi đánh giá
+                        Xem tất cả cảm nhận
                     </Link>
                 </div>
                 <p className='mb-6 text-lg font-medium dark:text-slate-300'>
-                    Xây dựng kỹ năng cùng khóa học và Mentor <br /> từ các công ty
-                    hàng đầu thế giới.
+                    Xem phản hồi thực tế để hiểu học viên đã nhận được gì <br /> sau khi học cùng khóa học và mentor tại Edu Hub.
                 </p>
                 <Slider {...settings} className='testimonial-slider'>
                     {items.map((items, i) => (

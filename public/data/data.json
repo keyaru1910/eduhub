@@ -75,114 +75,114 @@
     ],
     "CourseDetailData": [
         {
-            "course": "HTML, CSS, JS",
+            "course": "Nền tảng HTML, CSS, JavaScript",
             "imageSrc": "/images/courses/coursesOne.svg",
-            "profession": "Phát triển với HTML, CSS, JavaScript",
+            "profession": "Xây nền tảng frontend, làm chủ bố cục, tương tác và tư duy xây trang web từ đầu.",
             "price": "3600000",
             "category": "webdevelopment"
         },
         {
-            "course": "Node.js",
+            "course": "Backend với Node.js",
             "imageSrc": "/images/courses/coursesTwo.svg",
-            "profession": "Backend với Node.js và Express.js",
-            "price": "525000",
+            "profession": "Thiết kế API, xử lý nghiệp vụ và tổ chức dự án backend với Node.js và Express.",
+            "price": "2850000",
             "category": "webdevelopment"
         },
         {
-            "course": "Database",
+            "course": "Cơ sở dữ liệu cho Web App",
             "imageSrc": "/images/courses/coursesThree.svg",
-            "profession": "Học MongoDB với Mongoose",
-            "price": "525000",
+            "profession": "Làm việc với database, mô hình dữ liệu và kết nối ứng dụng bằng MongoDB hoặc PostgreSQL.",
+            "price": "2550000",
             "category": "webdevelopment"
         },
         {
-            "course": "React.js",
+            "course": "React.js thực chiến",
             "imageSrc": "/images/courses/coursesFour.svg",
-            "profession": "Học React với Redux Toolkit",
+            "profession": "Xây giao diện component-based, quản lý state và tổ chức dự án React theo hướng hiện đại.",
             "price": "2475000",
             "category": "webdevelopment"
         },
         {
-            "course": "React Native",
+            "course": "React Native từ A-Z",
             "imageSrc": "/images/courses/coursesOne.svg",
-            "profession": "Học React Native với Node.js",
+            "profession": "Phát triển ứng dụng di động đa nền tảng với React Native và kết nối API backend.",
             "price": "2225000",
             "category": "mobiledevelopment"
         },
         {
-            "course": "Swift",
+            "course": "Swift cơ bản",
             "imageSrc": "/images/courses/coursesThree.svg",
-            "profession": "Học Swift từ cơ bản",
+            "profession": "Làm quen ngôn ngữ Swift và cách xây dựng ứng dụng iOS với tư duy bài bản.",
             "price": "2225000",
             "category": "mobiledevelopment"
         },
         {
-            "course": "Flutter",
+            "course": "Flutter thực hành",
             "imageSrc": "/images/courses/coursesFour.svg",
-            "profession": "Phát triển ứng dụng Flutter",
+            "profession": "Xây app đa nền tảng với Flutter, tối ưu UI và quy trình phát triển sản phẩm mobile.",
             "price": "1725000",
             "category": "mobiledevelopment"
         },
         {
-            "course": "Onsen UI",
+            "course": "Thiết kế UI cho Mobile",
             "imageSrc": "/images/courses/coursesTwo.svg",
-            "profession": "Học Onsen UI với HTML, CSS",
+            "profession": "Tập trung vào bố cục, component và trải nghiệm giao diện cho ứng dụng di động.",
             "price": "1725000",
             "category": "mobiledevelopment"
         },
         {
-            "course": "TensorFlow",
+            "course": "Machine Learning với TensorFlow",
             "imageSrc": "/images/courses/coursesTwo.svg",
-            "profession": "Học TensorFlow với SQL",
+            "profession": "Làm quen pipeline dữ liệu, huấn luyện mô hình và triển khai bài toán AI cơ bản.",
             "price": "2475000",
             "category": "datascience"
         },
         {
-            "course": "AWS",
+            "course": "Data Platform trên AWS",
             "imageSrc": "/images/courses/coursesFour.svg",
-            "profession": "AWS Deep Learning AMI",
+            "profession": "Tiếp cận hệ sinh thái AWS cho bài toán lưu trữ, xử lý dữ liệu và machine learning.",
             "price": "2475000",
             "category": "datascience"
         },
         {
-            "course": "Bokeh",
+            "course": "Trực quan dữ liệu với Bokeh",
             "imageSrc": "/images/courses/coursesOne.svg",
-            "profession": "Học Bokeh với Python",
+            "profession": "Tạo dashboard và biểu đồ trực quan giúp kể chuyện bằng dữ liệu hiệu quả hơn.",
             "price": "2475000",
             "category": "datascience"
         },
         {
-            "course": "Scikit",
+            "course": "Phân tích dữ liệu với Scikit-learn",
             "imageSrc": "/images/courses/coursesThree.svg",
-            "profession": "Phát triển với Scikit và Python",
+            "profession": "Xây quy trình phân tích và mô hình hóa dữ liệu bằng Python cho người mới bắt đầu.",
             "price": "2225000",
             "category": "datascience"
         },
         {
-            "course": "Laas",
+            "course": "Hạ tầng cloud cơ bản",
             "imageSrc": "/images/courses/coursesThree.svg",
-            "profession": "Infra-as-a-Service",
-            "price": "525000",
+            "profession": "Hiểu mô hình hạ tầng cloud, tài nguyên compute và cách triển khai hệ thống cơ bản.",
+            "price": "1525000",
             "category": "cloudcomputing"
         },
         {
-            "course": "Iaas",
+            "course": "Dịch vụ cloud cho doanh nghiệp",
             "imageSrc": "/images/courses/coursesFour.svg",
-            "profession": "Info-as-a-Service",
-            "price": "725000",
+            "profession": "Làm quen cách doanh nghiệp sử dụng dịch vụ cloud để vận hành ứng dụng và dữ liệu.",
+            "price": "1725000",
             "category": "cloudcomputing"
         },
         {
-            "course": "Paas",
+            "course": "Triển khai ứng dụng với PaaS",
             "imageSrc": "/images/courses/coursesOne.svg",
-            "profession": "Platform-as-a-Service",
+            "profession": "Triển khai web app nhanh hơn với nền tảng cloud quản lý sẵn hạ tầng và runtime.",
             "price": "2475000",
             "category": "cloudcomputing"
         },
         {
-            "course": "Saas",
+            "course": "Mô hình sản phẩm SaaS",
             "imageSrc": "/images/courses/coursesTwo.svg",
-            "profession": "Software-as-a-Service",
+            "profession": "Hiểu kiến trúc, vận hành và cách xây mô hình phần mềm dịch vụ cho sản phẩm số.",
             "price": "1450000",
             "category": "cloudcomputing"
         }
@@ -217,7 +217,7 @@
             "color": "Luka Doncic"
         },
         {
-            "name": "Web Development / Web Design",
+            "name": "Web Development",
             "href": "#",
             "imageSrc": "/images/mentor/girl2.jpg",
             "imageAlt": "Ảnh mentor Web Development",
@@ -233,32 +233,32 @@
     ],
     "TestimonialData": [
         {
-            "profession": "Graphic Designer",
-            "name": "Bae Suzy",
+            "profession": "Junior UI Designer",
+            "name": "Ngọc Trâm",
             "imgSrc": "/images/testimonial/user-1.jpg",
             "starimg": "/images/testimonial/stars.png",
-            "detail": "Tôi muốn chuyển sang mảng UI/UX nhưng chưa biết bắt đầu từ đâu. Khóa học này cung cấp lộ trình cực kỳ bài bản, giúp tôi hệ thống lại toàn bộ kiến thức nền tảng."
+            "detail": "Tôi muốn chuyển sang UI/UX nhưng trước đây học rất rời rạc. Sau khi học tại Edu Hub, tôi có lộ trình rõ ràng hơn, biết cách xây case study và tự tin hơn khi làm portfolio."
         },
         {
-            "profession": "Freelance Web Developer",
-            "name": "Choi Woo-shik",
+            "profession": "Freelance Frontend Developer",
+            "name": "Khánh Minh",
             "imgSrc": "/images/testimonial/user-2.jpg",
             "starimg": "/images/testimonial/stars.png",
-            "detail": "Làm code lâu năm nhưng tôi luôn thấy yếu phần thẩm mỹ. Sau khóa học, tôi đã có thể tự tay thiết kế giao diện chuẩn chỉnh trước khi bắt tay vào lập trình."
+            "detail": "Tôi làm code khá lâu nhưng luôn yếu về trải nghiệm người dùng. Mentor ở đây giúp tôi nhìn sản phẩm theo góc độ bố cục, hành vi và cách trình bày chuyên nghiệp hơn trước khi bắt tay vào code."
         },
         {
-            "profession": "Product Manager",
-            "name": "Yoon Chung Ah",
+            "profession": "Product Executive",
+            "name": "Lan Chi",
             "imgSrc": "/images/testimonial/user-3.jpg",
             "starimg": "/images/testimonial/stars.png",
-            "detail": "Khóa học giúp tôi hiểu sâu về trải nghiệm người dùng (UX). Giờ đây tôi có thể giao tiếp hiệu quả hơn với đội ngũ design và đưa ra những quyết định sản phẩm đúng đắn."
+            "detail": "Khóa học giúp tôi hiểu rõ hơn về UX và cách phối hợp với team thiết kế. Tôi không chỉ học công cụ mà còn học được cách đặt câu hỏi đúng cho một sản phẩm số."
         },
         {
-            "profession": "Intern Designer",
-            "name": "Charlie Puth",
+            "profession": "Sinh viên năm cuối ngành CNTT",
+            "name": "Hoàng Nam",
             "imgSrc": "/images/testimonial/user-4.jpg",
             "starimg": "/images/testimonial/stars.png",
-            "detail": "Cảm ơn các giảng viên đã hướng dẫn tôi cách sử dụng Figma từ cơ bản đến nâng cao. Các tips về phím tắt và quản lý component giúp tốc độ làm việc của tôi tăng gấp đôi."
+            "detail": "Điều tôi thích nhất là được mentor review bài rất cụ thể. Từ một người chỉ biết làm theo tutorial, tôi đã tự hoàn thiện được sản phẩm demo và biết cách trình bày logic hơn."
         }
     ],
     "FooterLinkData": [
