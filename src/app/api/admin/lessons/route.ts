@@ -1,4 +1,4 @@
-import { NextResponse } from 'next'
+import { NextResponse } from 'next/server'
 import { requireAdminSession } from '@/server/auth/session'
 import { adminResources } from '@/server/admin'
 import { normalizeError } from '@/server/api'
