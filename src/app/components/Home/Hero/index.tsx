@@ -33,8 +33,22 @@ const Banner = ({
                 <div className='absolute inset-x-0 top-0 h-48 bg-linear-to-b from-slate-950 via-slate-950/80 to-transparent' />
             </div>
             <div className='relative px-6 lg:px-8'>
-                <div className='container'>
-                    <div className='flex flex-col gap-4 text-center'>
+                <div className='container relative'>
+                    <div className='flex flex-col gap-4 text-center relative z-10'>
+                        {/* DECORATIVE ICONS */}
+                        <div className='absolute -top-12 -right-4 md:right-8 animate-bounce-slow opacity-30 md:opacity-100'>
+                            <Icon icon='logos:java' className='text-4xl md:text-6xl' />
+                        </div>
+                        <div className='absolute top-24 -left-6 md:left-4 animate-float opacity-30 md:opacity-100'>
+                            <Icon icon='logos:kotlin-icon' className='text-3xl md:text-5xl' />
+                        </div>
+                        <div className='absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-20'>
+                            <div className='flex gap-2 scale-75 md:scale-100'>
+                                <div className='w-4 h-4 bg-orange-500 rounded-sm' />
+                                <div className='w-4 h-4 bg-green-500 rounded-sm' />
+                            </div>
+                        </div>
+
                         <h1 className='mx-auto max-w-4xl leading-tight font-bold tracking-tight dark:text-white'>
                             {'Nâng cao kỹ năng kỹ thuật với các khóa học của chúng tôi'}
                         </h1>
@@ -96,7 +110,15 @@ const Banner = ({
 
                     {/* DROPDOWN BUTTONS */}
 
-                    <div className='boxshadow mx-auto mt-12 max-w-4xl rounded-lg bg-white p-6 dark:border dark:border-white/10 dark:bg-slate-900/95 dark:shadow-black/30 lg:max-w-4xl lg:px-8'>
+                    <div className='boxshadow relative mx-auto mt-12 max-w-4xl rounded-lg bg-white p-6 dark:border dark:border-white/10 dark:bg-slate-900/95 dark:shadow-black/30 lg:max-w-4xl lg:px-8'>
+                        {/* MORE ICONS */}
+                        <div className='absolute -bottom-6 -right-6 hidden lg:block'>
+                            <Icon icon='logos:python' className='text-5xl' />
+                        </div>
+                        <div className='absolute -top-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0'>
+                            <Icon icon='logos:microsoft-icon' className='text-3xl md:text-4xl opacity-50 md:opacity-100' />
+                        </div>
+
                         <div className='grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-8'>
                             <div className='col-span-3'>
                                 <Dropdownone options={courseOptions} />

@@ -20,6 +20,8 @@ const DashboardPage = async () => {
     redirect('/')
   }
 
+  const displayName = session.user.name?.trim() || session.user.email?.split('@')[0] || 'Học viên'
+  const email = session.user.email || ''
   const enrollments = await enrollmentService.getStudentEnrollments(session.user.id)
 
   return (
@@ -34,13 +36,13 @@ const DashboardPage = async () => {
           <div className='mb-8 rounded-2xl bg-primary/5 p-8 dark:bg-slate-900 border border-primary/10'>
             <div className='flex items-center gap-4'>
               <div className='flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white text-2xl font-bold'>
-                {session.user.name.charAt(0).toUpperCase()}
+                {displayName.charAt(0).toUpperCase()}
               </div>
               <div>
                 <h2 className='text-2xl font-bold text-slate-900 dark:text-white'>
-                  Xin chào, {session.user.name}
+                  Xin chào, {displayName}
                 </h2>
-                <p className='text-slate-600 dark:text-slate-300'>{session.user.email}</p>
+                <p className='text-slate-600 dark:text-slate-300'>{email}</p>
               </div>
             </div>
           </div>

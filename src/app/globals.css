@@ -14,6 +14,19 @@
 
   --background-image-banner-image: var(--banner-url);
   --background-image-newsletter: var(--newsletter-url);
+
+  --animate-bounce-slow: bounce-slow 3s infinite;
+  --animate-float: float 4s ease-in-out infinite;
+
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(-15%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
+    50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
 /*

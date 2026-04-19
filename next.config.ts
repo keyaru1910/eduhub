@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
     /* config options here */
     basePath,
     assetPrefix: basePath,
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
     images: {
         unoptimized: true,
     },
