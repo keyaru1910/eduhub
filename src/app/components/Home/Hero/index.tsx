@@ -57,7 +57,7 @@ const Banner = ({
                         </p>
                         <div className='mx-auto w-fit rounded-2xl border border-white/30 bg-white/35 px-5 py-4 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-slate-900/70 dark:shadow-black/30'>
                             <div className='flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6'>
-                                <div className='hidden sm:flex -space-x-3 rounded-full bg-slate-950/18 px-2 py-1.5 ring-1 ring-white/30 dark:bg-white/5 dark:ring-white/10'>
+                                <div className='flex -space-x-3 rounded-full bg-slate-950/18 px-2 py-1.5 ring-1 ring-white/30 dark:bg-white/5 dark:ring-white/10'>
                                     {heroReviewAvatars.map((src, index) => (
                                         <div
                                             key={src}

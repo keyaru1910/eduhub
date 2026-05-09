@@ -10,7 +10,7 @@ const Footer = () => {
     <div className="bg-primary" id="first-section">
       <div className="container pt-60 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-16 xl:gap-8">
-          <div className="col-span-4 flex flex-col gap-5">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4 flex flex-col gap-5">
             <div>
               <Image
                 src={withBasePath("/images/logo/brand-favicon.ico")}
@@ -69,10 +69,10 @@ const Footer = () => {
           </div>
 
           {/* CLOUMN-2/3 */}
-          <div className="col-span-4">
-            <div className="flex gap-20">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4">
+            <div className="flex flex-wrap sm:flex-nowrap gap-10 lg:gap-20">
               {footerLinks.map((product, i) => (
-                <div key={i} className="group relative col-span-2">
+                <div key={i} className="group relative w-1/2 sm:w-auto">
                   <p className="text-white text-xl font-semibold mb-9">
                     {product.section}
                   </p>
@@ -95,11 +95,11 @@ const Footer = () => {
           </div>
           {/* CLOUMN-4 */}
 
-          <div className="col-span-4">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-4">
             <h3 className="text-white text-xl font-semibold mb-6">
               Luôn cập nhật
             </h3>
-            <div className="relative text-white focus-within:text-white flex flex-row-reverse w-[50%] lg:w-full">
+            <div className="relative text-white focus-within:text-white flex flex-row-reverse w-full">
               <input
                 type="email"
                 name="q"
@@ -124,24 +124,7 @@ const Footer = () => {
       </div>
       <div className="py-3">
         <h3 className="text-center text-white/60">
-          @2025 - Bản quyền thuộc về{" "}
-          <Link
-            href="https://adminmart.com/"
-            target="_blank"
-            className="hover:text-white"
-          >
-            {" "}
-            GetNextJs Templates.com{" "}
-          </Link>
-          • Phân phối bởi{" "}
-          <Link
-            href="https://themewagon.com/"
-            target="_blank"
-            className="hover:text-white"
-          >
-            {" "}
-            ThemeWagon
-          </Link>
+          @2025 - Bản quyền thuộc về eduhub
         </h3>
       </div>
     </div>

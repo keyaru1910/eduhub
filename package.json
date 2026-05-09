@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "next lint",
         "prisma:generate": "prisma generate",
-        "prisma:seed": "node prisma/seed.mjs"
+        "prisma:seed": "node prisma/seed.mjs",
+        "postinstall": "prisma generate"
     },
     "dependencies": {
         "@headlessui/react": "^2.2.0",
@@ -24,6 +25,7 @@
         "next": "15.2.4",
         "next-auth": "^4.24.11",
         "next-themes": "^0.4.6",
+        "nextjs-toploader": "^3.9.17",
         "nodemailer": "^8.0.5",
         "prisma": "^6.17.1",
         "react": "^19.0.0",

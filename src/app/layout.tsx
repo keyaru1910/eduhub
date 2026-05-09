@@ -4,6 +4,7 @@ import "./globals.css";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import AppProviders from "@/app/components/Providers/AppProviders";
 import Aoscompo from "@/utils/aos";
+import NextTopLoader from 'nextjs-toploader';
 const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
     return (
         <html lang="vi" suppressHydrationWarning>
             <body className={`${font.className}`}>
+                <NextTopLoader color="#0052cc" showSpinner={false} />
                 <style>{`:root{--banner-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/banner/background.png'); --newsletter-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/newsletter/hands.svg');}`}</style>
                 <AppProviders>
                     <Aoscompo>
