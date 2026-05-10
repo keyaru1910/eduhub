@@ -50,6 +50,8 @@ const Header: React.FC = () => {
     }
 
     useEffect(() => {
+        // Gọi ngay khi mount để lấy trạng thái scroll hiện tại
+        handleScroll()
         window.addEventListener('scroll', handleScroll)
         document.addEventListener('mousedown', handleClickOutside)
         return () => {

@@ -69,7 +69,7 @@ const DashboardPage = async () => {
               {enrollments.map((enrollment) => (
                 <div
                   key={enrollment.id}
-                  className='group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-slate-900'>
+                  className='group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md dark:border-white/10 dark:bg-slate-900'>
                   <div className='relative h-48 w-full overflow-hidden bg-slate-100 dark:bg-slate-800'>
                     <Image
                       src={withBasePath(enrollment.course.image)}
@@ -84,7 +84,7 @@ const DashboardPage = async () => {
                         {enrollment.status === 'ACTIVE' ? 'Đang học' : 'Hoàn thành'}
                       </span>
                     </div>
-                    <h4 className='mb-4 text-lg font-bold text-slate-900 dark:text-white line-clamp-2'>
+                    <h4 className='mb-4 min-h-[3.5rem] text-lg font-bold leading-7 text-slate-900 dark:text-white line-clamp-2'>
                       {enrollment.course.title}
                     </h4>
                     <div className='mt-auto pt-4'>

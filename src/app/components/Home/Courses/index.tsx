@@ -58,8 +58,8 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
     }
 
     const nameElements = selectedNames.map((name, index) => (
-        <div id='Courses' key={index} className='group flex rounded-xl border border-black/5 bg-white shadow-lg dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-            <div className='py-5 lg:py-0 flex flex-col'>
+        <div id='Courses' key={index} className='group flex h-full rounded-xl border border-black/5 bg-white shadow-lg dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
+            <div className='py-5 lg:py-0 flex w-full flex-col'>
                 <div className='overflow-hidden rounded-lg bg-gray-100 dark:bg-slate-800'>
                     <Image
                         src={withBasePath(name.imageSrc)}
@@ -70,17 +70,17 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
                     />
                 </div>
                 <div className='p-4 flex flex-col justify-between gap-5 flex-1'>
-                    <div className="flex flex-col gap-5">
-                        <div className='flex items-center justify-between'>
-                            <p className='block font-normal text-gray-900 dark:text-white line-clamp-2 pr-2'>{name.course}</p>
+                    <div className="grid grid-rows-[3rem_3.5rem] gap-5">
+                        <div className='grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3'>
+                            <p className='h-12 overflow-hidden text-ellipsis font-normal leading-6 text-gray-900 dark:text-white line-clamp-2'>{name.course}</p>
                             <div className='shrink-0 whitespace-nowrap text-lg font-semibold text-success border-solid border-2 border-success rounded-md px-2 py-0.5'>
                                 <p>{formatVndPrice(name.price)}</p>
                             </div>
                         </div>
-                        <Link href={name.slug ? `/courses/${name.slug}` : '/'}>
+                        <Link href={name.slug ? `/courses/${name.slug}` : '/'} className='block'>
                             <p
                                 aria-hidden='true'
-                                className='text-xl font-semibold group-hover:cursor-pointer group-hover:text-primary dark:text-white line-clamp-2'>
+                                className='min-h-[3.5rem] text-xl font-semibold leading-7 group-hover:cursor-pointer group-hover:text-primary dark:text-white line-clamp-2'>
                                 {name.profession}
                             </p>
                         </Link>
