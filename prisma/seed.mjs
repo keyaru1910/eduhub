@@ -187,15 +187,30 @@ const main = async () => {
   await prisma.passwordResetToken.deleteMany()
   await prisma.testimonial.deleteMany()
   await prisma.mentor.deleteMany()
+  await prisma.enrollment.deleteMany()
+  await prisma.order.deleteMany()
+  await prisma.lesson.deleteMany()
   await prisma.course.deleteMany()
   await prisma.user.deleteMany()
 
+  // Tạo tài khoản Quản trị viên (Admin)
   await prisma.user.create({
     data: {
       name: 'Edu Hub Admin',
       email: process.env.SEED_ADMIN_EMAIL || 'admin@eduhub.local',
       passwordHash: hashPassword(adminPassword),
       role: UserRole.ADMIN,
+    },
+  })
+
+  // Tạo tài khoản Học viên mẫu (Student) để test luồng học tập và thanh toán
+  const demoStudentPassword = 'Student@123456'
+  const demoStudent = await prisma.user.create({
+    data: {
+      name: 'Nguyễn Văn Học Viên',
+      email: 'student@eduhub.local',
+      passwordHash: hashPassword(demoStudentPassword),
+      role: UserRole.STUDENT,
     },
   })
 
@@ -212,6 +227,32 @@ const main = async () => {
       published: true,
     })),
   })
+
+  // Lấy khóa học đầu tiên để gán đơn hàng mẫu và ghi danh cho Student
+  const firstCourse = await prisma.course.findFirst()
+  if (firstCourse) {
+    const demoOrder = await prisma.order.create({
+      data: {
+        orderCode: `ORD-DEMO-${Date.now().toString().slice(-6)}`,
+        userId: demoStudent.id,
+        courseId: firstCourse.id,
+        amount: firstCourse.price,
+        status: 'PAID',
+        paymentMethod: 'VNPAY',
+        transactionRef: 'VNPAY_DEMO_REF_123456',
+        paidAt: new Date(),
+      },
+    })
+
+    await prisma.enrollment.create({
+      data: {
+        userId: demoStudent.id,
+        courseId: firstCourse.id,
+        orderId: demoOrder.id,
+        status: 'ACTIVE',
+      },
+    })
+  }
 
   await prisma.mentor.createMany({
     data: mentors.map((mentor) => ({
@@ -239,9 +280,9 @@ const main = async () => {
     })),
   })
 
-  console.log('Seed completed')
-  console.log(`Admin: ${process.env.SEED_ADMIN_EMAIL || 'admin@eduhub.local'}`)
-  console.log(`Password: ${adminPassword}`)
+  console.log('Seed completed thành công!')
+  console.log(`Admin   : ${process.env.SEED_ADMIN_EMAIL || 'admin@eduhub.local'} | Mật khẩu: ${adminPassword}`)
+  console.log(`Student : student@eduhub.local | Mật khẩu: ${demoStudentPassword}`)
 }
 
 main()

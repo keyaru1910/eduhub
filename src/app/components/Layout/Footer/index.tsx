@@ -124,7 +124,7 @@ const Footer = () => {
       </div>
       <div className="py-3">
         <h3 className="text-center text-white/60">
-          @2025 - Bản quyền thuộc về eduhub
+          @2026 - Bản quyền thuộc về Eduhub
         </h3>
       </div>
     </div>

@@ -11,7 +11,7 @@ type AppProvidersProps = {
 const AppProviders = ({ children }: AppProvidersProps) => {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <SessionProvider>
+      <SessionProvider refetchInterval={0} refetchOnWindowFocus={false}>
         {children}
         <Toaster position="top-right" />
       </SessionProvider>

@@ -59,45 +59,49 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
 
     const nameElements = selectedNames.map((name, index) => (
         <div id='Courses' key={index} className='group flex h-full rounded-xl border border-black/5 bg-white shadow-lg dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20'>
-            <div className='py-5 lg:py-0 flex w-full flex-col'>
-                <div className='overflow-hidden rounded-lg bg-gray-100 dark:bg-slate-800'>
-                    <Image
-                        src={withBasePath(name.imageSrc)}
-                        alt={name.course}
-                        width={700}
-                        height={700}
-                        className='h-full w-full object-cover object-center group-hover:scale-125 transition duration-300 ease-in-out'
-                    />
+            <div className='flex h-full w-full flex-col'>
+                <div className='relative h-[220px] w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-slate-800'>
+                    <Link href={name.slug ? `/courses/${name.slug}` : '/'} className='block h-full w-full'>
+                        <Image
+                            src={withBasePath(name.imageSrc)}
+                            alt={name.course}
+                            width={700}
+                            height={700}
+                            className='h-full w-full object-cover object-center transition duration-300 ease-in-out group-hover:scale-125'
+                        />
+                    </Link>
                 </div>
-                <div className='p-4 flex flex-col justify-between gap-5 flex-1'>
-                    <div className="grid grid-rows-[3rem_3.5rem] gap-5">
-                        <div className='grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3'>
-                            <p className='h-12 overflow-hidden text-ellipsis font-normal leading-6 text-gray-900 dark:text-white line-clamp-2'>{name.course}</p>
-                            <div className='shrink-0 whitespace-nowrap text-lg font-semibold text-success border-solid border-2 border-success rounded-md px-2 py-0.5'>
+                <div className='flex flex-1 flex-col justify-between gap-4 p-4'>
+                    <div className='flex flex-1 flex-col gap-3'>
+                        <div className='flex items-start justify-between gap-3'>
+                            <p className='min-h-[48px] flex-1 overflow-hidden text-ellipsis text-base font-normal leading-6 text-gray-900 dark:text-white line-clamp-2'>
+                                {name.course}
+                            </p>
+                            <div className='shrink-0 whitespace-nowrap rounded-md border-2 border-solid border-success px-2 py-0.5 text-base font-semibold text-success'>
                                 <p>{formatVndPrice(name.price)}</p>
                             </div>
                         </div>
-                        <Link href={name.slug ? `/courses/${name.slug}` : '/'} className='block'>
+                        <Link href={name.slug ? `/courses/${name.slug}` : '/'} className='mt-auto block'>
                             <p
                                 aria-hidden='true'
-                                className='min-h-[3.5rem] text-xl font-semibold leading-7 group-hover:cursor-pointer group-hover:text-primary dark:text-white line-clamp-2'>
+                                className='min-h-[56px] text-xl font-semibold leading-7 text-gray-900 group-hover:cursor-pointer group-hover:text-primary dark:text-white line-clamp-2'>
                                 {name.profession}
                             </p>
                         </Link>
                     </div>
-                    <div className='flex justify-between rounded-md border-2 border-solid p-2 dark:border-white/10 dark:text-slate-300'>
+                    <div className='flex items-center justify-between rounded-md border-2 border-solid p-2 dark:border-white/10 dark:text-slate-300'>
                         <p>12 buổi học</p>
                         <div className='flex flex-row space-x-4'>
-                            <div className='flex'>
+                            <div className='flex items-center'>
                                 <Image
                                     src={withBasePath('/images/courses/account.svg')}
                                     width={18}
                                     height={20}
                                     alt='circle'
                                 />
-                                <p className='text-lightgrey ml-1'>120</p>
+                                <p className='ml-1 text-lightgrey'>120</p>
                             </div>
-                            <div className='flex'>
+                            <div className='flex items-center'>
                                 <Image
                                     src={withBasePath('/images/courses/Star.svg')}
                                     width={18}

@@ -76,112 +76,112 @@
     "CourseDetailData": [
         {
             "course": "Nền tảng HTML, CSS, JavaScript",
-            "imageSrc": "/images/courses/coursesOne.svg",
+            "imageSrc": "/images/courses/htmlcssjs.jpg",
             "profession": "Xây nền tảng frontend, làm chủ bố cục, tương tác và tư duy xây trang web từ đầu.",
             "price": "3600000",
             "category": "webdevelopment"
         },
         {
             "course": "Backend với Node.js",
-            "imageSrc": "/images/courses/coursesTwo.svg",
+            "imageSrc": "/images/courses/api.jpg",
             "profession": "Thiết kế API, xử lý nghiệp vụ và tổ chức dự án backend với Node.js và Express.",
             "price": "2850000",
             "category": "webdevelopment"
         },
         {
             "course": "Cơ sở dữ liệu cho Web App",
-            "imageSrc": "/images/courses/coursesThree.svg",
+            "imageSrc": "/images/courses/backend.jpg",
             "profession": "Làm việc với database, mô hình dữ liệu và kết nối ứng dụng bằng MongoDB hoặc PostgreSQL.",
             "price": "2550000",
             "category": "webdevelopment"
         },
         {
             "course": "React.js thực chiến",
-            "imageSrc": "/images/courses/coursesFour.svg",
+            "imageSrc": "/images/courses/component.jpg",
             "profession": "Xây giao diện component-based, quản lý state và tổ chức dự án React theo hướng hiện đại.",
             "price": "2475000",
             "category": "webdevelopment"
         },
         {
             "course": "React Native từ A-Z",
-            "imageSrc": "/images/courses/coursesOne.svg",
+            "imageSrc": "/images/courses/React.svg",
             "profession": "Phát triển ứng dụng di động đa nền tảng với React Native và kết nối API backend.",
             "price": "2225000",
             "category": "mobiledevelopment"
         },
         {
             "course": "Swift cơ bản",
-            "imageSrc": "/images/courses/coursesThree.svg",
+            "imageSrc": "/images/courses/swift.jpg",
             "profession": "Làm quen ngôn ngữ Swift và cách xây dựng ứng dụng iOS với tư duy bài bản.",
             "price": "2225000",
             "category": "mobiledevelopment"
         },
         {
             "course": "Flutter thực hành",
-            "imageSrc": "/images/courses/coursesFour.svg",
+            "imageSrc": "/images/courses/flutter.jpg",
             "profession": "Xây app đa nền tảng với Flutter, tối ưu UI và quy trình phát triển sản phẩm mobile.",
             "price": "1725000",
             "category": "mobiledevelopment"
         },
         {
             "course": "Thiết kế UI cho Mobile",
-            "imageSrc": "/images/courses/coursesTwo.svg",
+            "imageSrc": "/images/courses/UI.svg",
             "profession": "Tập trung vào bố cục, component và trải nghiệm giao diện cho ứng dụng di động.",
             "price": "1725000",
             "category": "mobiledevelopment"
         },
         {
             "course": "Machine Learning với TensorFlow",
-            "imageSrc": "/images/courses/coursesTwo.svg",
+            "imageSrc": "/images/courses/machine_learning.jpg",
             "profession": "Làm quen pipeline dữ liệu, huấn luyện mô hình và triển khai bài toán AI cơ bản.",
             "price": "2475000",
             "category": "datascience"
         },
         {
             "course": "Data Platform trên AWS",
-            "imageSrc": "/images/courses/coursesFour.svg",
+            "imageSrc": "/images/courses/Data_Platform.jpg",
             "profession": "Tiếp cận hệ sinh thái AWS cho bài toán lưu trữ, xử lý dữ liệu và machine learning.",
             "price": "2475000",
             "category": "datascience"
         },
         {
             "course": "Trực quan dữ liệu với Bokeh",
-            "imageSrc": "/images/courses/coursesOne.svg",
+            "imageSrc": "/images/courses/Bokeh.svg",
             "profession": "Tạo dashboard và biểu đồ trực quan giúp kể chuyện bằng dữ liệu hiệu quả hơn.",
             "price": "2475000",
             "category": "datascience"
         },
         {
             "course": "Phân tích dữ liệu với Scikit-learn",
-            "imageSrc": "/images/courses/coursesThree.svg",
+            "imageSrc": "/images/courses/Scikit-learn.svg",
             "profession": "Xây quy trình phân tích và mô hình hóa dữ liệu bằng Python cho người mới bắt đầu.",
             "price": "2225000",
             "category": "datascience"
         },
         {
             "course": "Hạ tầng cloud cơ bản",
-            "imageSrc": "/images/courses/coursesThree.svg",
+            "imageSrc": "/images/courses/cloud.jpg",
             "profession": "Hiểu mô hình hạ tầng cloud, tài nguyên compute và cách triển khai hệ thống cơ bản.",
             "price": "1525000",
             "category": "cloudcomputing"
         },
         {
             "course": "Dịch vụ cloud cho doanh nghiệp",
-            "imageSrc": "/images/courses/coursesFour.svg",
+            "imageSrc": "/images/courses/cloud_business.jpg",
             "profession": "Làm quen cách doanh nghiệp sử dụng dịch vụ cloud để vận hành ứng dụng và dữ liệu.",
             "price": "1725000",
             "category": "cloudcomputing"
         },
         {
             "course": "Triển khai ứng dụng với PaaS",
-            "imageSrc": "/images/courses/coursesOne.svg",
+            "imageSrc": "/images/courses/PaaS.jpg",
             "profession": "Triển khai web app nhanh hơn với nền tảng cloud quản lý sẵn hạ tầng và runtime.",
             "price": "2475000",
             "category": "cloudcomputing"
         },
         {
             "course": "Mô hình sản phẩm SaaS",
-            "imageSrc": "/images/courses/coursesTwo.svg",
+            "imageSrc": "/images/courses/saas.jpg",
             "profession": "Hiểu kiến trúc, vận hành và cách xây mô hình phần mềm dịch vụ cho sản phẩm số.",
             "price": "1450000",
             "category": "cloudcomputing"

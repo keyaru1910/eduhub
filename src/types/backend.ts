@@ -80,6 +80,7 @@ export type EnrollmentInput = {
   userId: string
   courseId: string
   status: string
+  orderId?: string | null
 }
 
 export type LessonInput = {
@@ -91,3 +92,43 @@ export type LessonInput = {
   order: number
   published: boolean
 }
+
+export type OrderStatus = 'PENDING' | 'PAID' | 'CANCELLED' | 'FAILED'
+
+export type OrderInput = {
+  orderCode: string
+  userId: string
+  courseId: string
+  amount: number
+  status?: OrderStatus
+  paymentMethod?: string
+  transactionRef?: string | null
+  paymentUrl?: string | null
+  paidAt?: Date | null
+}
+
+export type OrderListItem = {
+  id: string
+  orderCode: string
+  amount: number
+  status: OrderStatus
+  paymentMethod: string
+  paidAt: Date | null
+  createdAt: Date
+  course: {
+    id: string
+    title: string
+    slug: string
+    image: string
+    price: number
+  }
+}
+
+export type OrderAdminItem = OrderListItem & {
+  user: {
+    id: string
+    name: string
+    email: string
+  }
+}
+

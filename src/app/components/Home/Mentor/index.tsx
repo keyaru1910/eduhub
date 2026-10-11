@@ -11,15 +11,18 @@ import withBasePath from '@/utils/basePath'
 const Mentor = ({ items }: { items: MentorType[] }) => {
     const settings = {
         dots: false,
-        infinite: items.length > 3,
+        infinite: true,
         slidesToShow: Math.min(items.length, 3),
         slidesToScroll: 1,
         arrows: false,
-        autoplay: items.length > 1,
-        speed: 5000,
-        autoplaySpeed: 0,
+        autoplay: true,
+        speed: 1000,
+        autoplaySpeed: 2200,
         cssEase: 'linear' as const,
         pauseOnHover: true,
+        swipeToSlide: true,
+        draggable: true,
+        waitForAnimate: false,
         responsive: [
             {
                 breakpoint: 1024,

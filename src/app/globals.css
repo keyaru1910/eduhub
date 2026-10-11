@@ -19,13 +19,29 @@
   --animate-float: float 4s ease-in-out infinite;
 
   @keyframes bounce-slow {
-    0%, 100% { transform: translateY(-15%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
-    50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); }
+
+    0%,
+    100% {
+      transform: translateY(-15%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }
 
@@ -38,6 +54,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -65,12 +82,33 @@
   }
 }
 
+:root {
+  --font-body: var(--font-nunito), 'Segoe UI', sans-serif;
+  --font-heading: var(--font-oswald), 'Segoe UI', sans-serif;
+  --font-display: var(--font-space-grotesk), 'Segoe UI', sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   @apply bg-white text-black dark:bg-slate-950 dark:text-white;
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.oswald {
+  font-family: var(--font-heading);
+}
+
+.font-display {
+  font-family: var(--font-display);
 }
 
 #testimonial-section .testimonial-slider .slick-track {
@@ -81,6 +119,6 @@ body {
   height: inherit;
 }
 
-#testimonial-section .testimonial-slider .slick-slide > div {
+#testimonial-section .testimonial-slider .slick-slide>div {
   height: 100%;
 }
