@@ -36,7 +36,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang='vi' suppressHydrationWarning>
+        <html lang='vi' suppressHydrationWarning data-scroll-behavior='smooth'>
             <body className={`${nunito.variable} ${oswald.variable} ${spaceGrotesk.variable}`}>
                 <NextTopLoader color='#0052cc' showSpinner={false} />
                 <style>{`:root{--banner-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/banner/background.png'); --newsletter-url: url('${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/newsletter/hands.svg');}`}</style>

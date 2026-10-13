@@ -15,11 +15,43 @@ export const authService = {
 
     const user = await usersRepository.findByEmail(email)
 
-    if (!user || !verifyPassword(password, user.passwordHash)) {
+    if (!user || !user.passwordHash || !verifyPassword(password, user.passwordHash)) {
       throw badRequest('Email hoặc mật khẩu không đúng.', 'INVALID_CREDENTIALS')
     }
 
     return user
+  },
+
+  /**
+   * Xử lý đăng nhập bằng tài khoản Google:
+   * - Nếu tài khoản chưa tồn tại: Tự động đăng ký tài khoản học viên mới.
+   * - Nếu tài khoản đã tồn tại: Cho phép đăng nhập và cập nhật ảnh đại diện nếu có.
+   */
+  async xuLyDangNhapGoogle(input: {
+    name: string
+    email: string
+    avatarUrl?: string
+  }) {
+    if (!hasDatabaseUrl) {
+      throw internalError('Database chưa được cấu hình.', 'DATABASE_NOT_CONFIGURED')
+    }
+
+    const normalizedEmail = input.email.trim().toLowerCase()
+    const existingUser = await usersRepository.findByEmail(normalizedEmail)
+
+    if (existingUser) {
+      // Nếu user chưa có avatar thì lưu avatar từ Google
+      if (!existingUser.avatarUrl && input.avatarUrl) {
+        await usersRepository.updateAvatar(existingUser.id, input.avatarUrl)
+      }
+      return existingUser
+    }
+
+    return await usersRepository.createOAuthStudent({
+      name: input.name,
+      email: normalizedEmail,
+      avatarUrl: input.avatarUrl,
+    })
   },
 
   async signup(input: { name: string; email: string; password: string }) {

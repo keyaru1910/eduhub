@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { Icon } from '@iconify/react'
 import Breadcrumb from '@/app/components/Common/Breadcrumb'
 import Newsletter from '@/app/components/Home/Newsletter'
+import RegisterStudentButton from './RegisterStudentButton'
 
 export const metadata: Metadata = {
   title: 'Đăng ký | Edu Hub',
@@ -63,12 +64,7 @@ const RegisterPage = () => {
               </div>
 
               <div className='mt-8'>
-                <Link
-                  href='/signup'
-                  className='inline-flex w-full items-center justify-center gap-2 rounded-xl border border-primary bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-md shadow-primary/25 transition duration-300 hover:bg-transparent hover:text-primary dark:hover:bg-primary/10'>
-                  <span>Tạo tài khoản học viên ngay</span>
-                  <Icon icon='solar:arrow-right-line-duotone' className='text-xl' />
-                </Link>
+                <RegisterStudentButton />
               </div>
             </div>
 

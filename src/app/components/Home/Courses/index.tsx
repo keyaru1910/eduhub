@@ -98,6 +98,7 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
                                     width={18}
                                     height={20}
                                     alt='circle'
+                                    style={{ width: 'auto', height: 'auto' }}
                                 />
                                 <p className='ml-1 text-lightgrey'>120</p>
                             </div>
@@ -107,6 +108,7 @@ const NamesList = ({ items }: { items: CourseDetailType[] }) => {
                                     width={18}
                                     height={20}
                                     alt='star'
+                                    style={{ width: 'auto', height: 'auto' }}
                                 />
                                 <p className='ml-1'>4.5</p>
                             </div>

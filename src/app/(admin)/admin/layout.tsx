@@ -37,6 +37,9 @@ const AdminLayout = async ({ children }: AdminLayoutProps) => {
             <Link href='/admin' className='rounded-xl border border-slate-200 px-4 py-3 dark:border-white/10 dark:text-white'>
               Tổng quan
             </Link>
+            <Link href='/admin/orders' className='rounded-xl border border-slate-200 px-4 py-3 dark:border-white/10 dark:text-white font-medium text-primary'>
+              Đơn hàng & Doanh thu
+            </Link>
             <Link href='/admin/courses' className='rounded-xl border border-slate-200 px-4 py-3 dark:border-white/10 dark:text-white'>
               Khóa học
             </Link>

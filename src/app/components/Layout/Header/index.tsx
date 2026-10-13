@@ -4,23 +4,19 @@ import { useEffect, useRef, useState } from 'react'
 import Logo from './Logo'
 import HeaderLink from '../Header/Navigation/HeaderLink'
 import MobileHeaderLink from '../Header/Navigation/MobileHeaderLink'
-import Signin from '@/app/components/Auth/SignIn'
-import SignUp from '@/app/components/Auth/SignUp'
 import ThemeToggler from './ThemeToggler'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { headerLinks } from '@/server/marketing-data'
 import { signOut, useSession } from 'next-auth/react'
+import { useAuthModal } from '@/app/components/Auth/AuthModalContext'
 
 const Header: React.FC = () => {
     const [navbarOpen, setNavbarOpen] = useState(false)
     const [sticky, setSticky] = useState(false)
-    const [isSignInOpen, setIsSignInOpen] = useState(false)
-    const [isSignUpOpen, setIsSignUpOpen] = useState(false)
+    const { openSignInModal, openSignUpModal } = useAuthModal()
     const { data: session } = useSession()
 
     const navbarRef = useRef<HTMLDivElement>(null)
-    const signInRef = useRef<HTMLDivElement>(null)
-    const signUpRef = useRef<HTMLDivElement>(null)
     const mobileMenuRef = useRef<HTMLDivElement>(null)
 
     const handleScroll = () => {
@@ -28,18 +24,6 @@ const Header: React.FC = () => {
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (
-            signInRef.current &&
-            !signInRef.current.contains(event.target as Node)
-        ) {
-            setIsSignInOpen(false)
-        }
-        if (
-            signUpRef.current &&
-            !signUpRef.current.contains(event.target as Node)
-        ) {
-            setIsSignUpOpen(false)
-        }
         if (
             mobileMenuRef.current &&
             !mobileMenuRef.current.contains(event.target as Node) &&
@@ -58,15 +42,15 @@ const Header: React.FC = () => {
             window.removeEventListener('scroll', handleScroll)
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [navbarOpen, isSignInOpen, isSignUpOpen])
+    }, [navbarOpen])
 
     useEffect(() => {
-        if (isSignInOpen || isSignUpOpen || navbarOpen) {
+        if (navbarOpen) {
             document.body.style.overflow = 'hidden'
         } else {
             document.body.style.overflow = ''
         }
-    }, [isSignInOpen, isSignUpOpen, navbarOpen])
+    }, [navbarOpen])
 
     return (
         <header
@@ -104,64 +88,21 @@ const Header: React.FC = () => {
                         ) : (
                             <button
                                 className='hidden rounded-lg border border-primary bg-transparent px-6 py-2 text-primary duration-300 hover:cursor-pointer hover:bg-primary hover:text-white lg:block'
-                                onClick={() => {
-                                    setIsSignInOpen(true)
-                                }}>
+                                onClick={openSignInModal}>
                                 Đăng nhập
                             </button>
                         )}
-                        {isSignInOpen && (
-                            <div className='fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50'>
-                                <div
-                                    ref={signInRef}
-                                    className='relative mx-auto w-full max-w-md overflow-hidden rounded-lg bg-white px-8 pb-8 pt-14 text-center backdrop-blur-md dark:bg-slate-900'>
-                                    <button
-                                        onClick={() => setIsSignInOpen(false)}
-                                        className='absolute top-0 right-0 mr-8 mt-8 dark:invert'
-                                        aria-label='Close Sign In Modal'>
-                                        <Icon
-                                            icon='material-symbols:close-rounded'
-                                            width={24}
-                                            height={24}
-                                            className='text-black hover:text-primary inline-block hover:cursor-pointer'
-                                        />
-                                    </button>
-                                    <Signin />
-                                </div>
-                            </div>
-                        )}
+
                         {!session?.user && (
                             <button
                                 className='hidden rounded-lg border border-primary bg-primary px-6 py-2 text-base font-medium text-white duration-300 hover:bg-transparent hover:text-primary hover:cursor-pointer lg:block'
-                                onClick={() => {
-                                    setIsSignUpOpen(true)
-                                }}>
+                                onClick={openSignUpModal}>
                                 Đăng ký
                             </button>
                         )}
                         <div className='hidden lg:flex items-center rounded-full border border-black/10 bg-white/90 px-1.5 py-1 shadow-sm dark:border-white/15 dark:bg-slate-900/90'>
                             <ThemeToggler />
                         </div>
-                        {isSignUpOpen && (
-                            <div className='fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50'>
-                                <div
-                                    ref={signUpRef}
-                                    className='relative mx-auto w-full max-w-md overflow-hidden rounded-lg bg-white px-8 pb-8 pt-14 text-center backdrop-blur-md dark:bg-slate-900'>
-                                    <button
-                                        onClick={() => setIsSignUpOpen(false)}
-                                        className='absolute top-0 right-0 mr-8 mt-8 dark:invert'
-                                        aria-label='Close Sign Up Modal'>
-                                        <Icon
-                                            icon='material-symbols:close-rounded'
-                                            width={24}
-                                            height={24}
-                                            className='text-black hover:text-primary inline-block hover:cursor-pointer'
-                                        />
-                                    </button>
-                                    <SignUp />
-                                </div>
-                            </div>
-                        )}
                         <button
                             onClick={() => setNavbarOpen(!navbarOpen)}
                             className='block rounded-lg p-2 lg:hidden'
@@ -226,17 +167,17 @@ const Header: React.FC = () => {
                             ) : (
                                 <>
                                     <button
-                                        className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                        className='bg-primary text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
                                         onClick={() => {
-                                            setIsSignInOpen(true)
+                                            openSignInModal()
                                             setNavbarOpen(false)
                                         }}>
                                         Đăng nhập
                                     </button>
                                     <button
-                                        className='bg-primary text-white px-4 py-2 rounded-lg border  border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
+                                        className='bg-primary text-white px-4 py-2 rounded-lg border border-primary hover:text-primary hover:bg-transparent hover:cursor-pointer transition duration-300 ease-in-out'
                                         onClick={() => {
-                                            setIsSignUpOpen(true)
+                                            openSignUpModal()
                                             setNavbarOpen(false)
                                         }}>
                                         Đăng ký

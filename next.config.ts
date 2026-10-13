@@ -17,6 +17,15 @@ const nextConfig: NextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
+    async redirects() {
+        return [
+            {
+                source: '/signup',
+                destination: '/?auth=signup',
+                permanent: false,
+            },
+        ]
+    },
 }
 
 export default nextConfig

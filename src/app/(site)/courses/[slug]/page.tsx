@@ -773,7 +773,11 @@ const CourseDetailPage = async ({ params }: Props) => {
                   Tiếp tục học
                 </Link>
               ) : (
-                <EnrollButton courseSlug={course.slug} isLoggedIn={!!session?.user} />
+                <EnrollButton
+                  courseSlug={course.slug}
+                  isLoggedIn={!!session?.user}
+                  price={course.price}
+                />
               )}
             </div>
             
